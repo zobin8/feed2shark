@@ -26,6 +26,12 @@ Alternatively you can donate cryptocurrencies:
         # # or
         # python3 setup.py install --install-scripts=/usr/bin
 
+### Create the authorization for the Feed2toot app
+
+* Just launch the following command::
+
+        $ register_feed2toot_app
+
 ### Use Feed2toot
 
 * Create or modify feed2toot.ini file in order to configure feed2toot:
