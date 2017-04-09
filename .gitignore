@@ -1,0 +1,8 @@
+docs/build/
+__pycache__
+*.swp
+*.pyc
+*.db
+*.ini
+*.txt
+*.bck
