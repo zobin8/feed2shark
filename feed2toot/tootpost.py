@@ -42,7 +42,8 @@ class TootPost:
         '''Main of the TweetPost class'''
         mastodon = Mastodon(
             client_id = self.config.get('mastodon', 'client_credentials'),
-            access_token = self.config.get('mastodon', 'user_credentials')
+            access_token = self.config.get('mastodon', 'user_credentials'),
+            api_base_url = self.config.get('mastodon', 'instance_url')
         )
         mastodon.toot(self.toot)
 
