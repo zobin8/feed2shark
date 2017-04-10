@@ -37,6 +37,7 @@ Alternatively you can donate cryptocurrencies:
 * Create or modify feed2toot.ini file in order to configure feed2toot:
 
         [mastodon]
+        instance_url=https://mastodon.social
         user_credentials=feed2toot_usercred.txt
         client_credentials=feed2toot_clientcred.txt
 
