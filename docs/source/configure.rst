@@ -70,7 +70,7 @@ List of rss feeds
 =================
 Simple list of rss feeds
 ------------------------
-With the parameter **uri_list**, you can define a list of uri to use. Starting from 0.10, Feed2toot is now able to match specific patterns for each of the rss feeds from this list. Consider the following rss section of the configuration file::
+With the parameter **uri_list**, you can define a list of uri to use. Feed2toot is able to match specific patterns for each of the rss feeds from this list. Consider the following rss section of the configuration file::
 
     [rss]
     uri_list=/home/john/feed2toot/rsslist.txt
