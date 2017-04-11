@@ -25,7 +25,6 @@ import sys
 
 # 3rd party libraries imports
 import feedparser
-import tweepy
 from mastodon import Mastodon
 
 class TootPost:

@@ -27,7 +27,6 @@ import sys
 # 3rd party libraries imports
 import feedparser
 from persistentlist import PersistentList
-import tweepy
 
 # app libraries imports
 from feed2toot.addtags import AddTags
