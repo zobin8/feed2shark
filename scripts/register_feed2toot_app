@@ -47,6 +47,7 @@ while not userok:
 password = getpass(prompt='Mastodon password:')
 Mastodon.create_app(
      'feed2toot',
+      api_base_url=instance,
       to_file = '{cwd}/feed2toot_clientcred.txt'.format(cwd=getcwd())
 )
 mastodon = Mastodon(client_id = '{cwd}/feed2toot_clientcred.txt'.format(cwd=getcwd()),
