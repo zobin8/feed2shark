@@ -31,7 +31,6 @@ class AddTags(object):
     def main(self):
         '''Main of the AddTags class class'''
         maxlength = 500
-        shortenedlinklength = 23
         tweetlength = len(self.tweet)
 
         # sort list of tags, the ones with the greater length first
