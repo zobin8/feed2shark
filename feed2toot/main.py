@@ -106,8 +106,7 @@ class Main(object):
                     if 'id' not in entry:
                         # malformed feed entry, skip
                         continue
-                    logging.debug('found feed entry %s, %s', entry['id'], entry['title'])
-
+                    logging.debug('found feed entry {entryid}'.format(entryid=entry['id']))
 
                     rss = {
                         'id': entry['id'],
