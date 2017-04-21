@@ -55,11 +55,14 @@ class ConfParse(object):
                 ############################
                 # tweet option
                 ############################
-                confoption = 'tweet'
-                if config.has_option(section, confoption):
+                oldconfoption = 'tweet'
+                confoption = 'toot'
+                if config.has_option(section, oldconfoption):
+                    self.tweetformat = config.get(section, oldconfoption)
+                elif config.has_option(section, confoption):
                     self.tweetformat = config.get(section, confoption)
                 else:
-                    sys.exit('You should define a format for your tweet with the keyword "tweet" in the [rss] section')
+                    sys.exit('You should define a format for your tweet with the parameter "{confoption}" in the [{section}] section'.format(confoption=confoption, section=section))
                 ############################
                 # pattern format option
                 ############################
