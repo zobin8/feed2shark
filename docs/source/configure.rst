@@ -32,11 +32,11 @@ In order to configure Feed2toot, you need to create a feed2toot.ini file (or any
     cache_limit=10000
 
     [rss]
-    uri: https://www.journalduhacker.net/rss
-    uri_list: /etc/feed2toot//rsslist.txt
-    tweet: {title} {link}
-    title_pattern: Open Source
-    title_pattern_case_sensitive: true
+    uri=https://www.journalduhacker.net/rss
+    uri_list=/etc/feed2toot//rsslist.txt
+    tweet={title} {link}
+    title_pattern=Open Source
+    title_pattern_case_sensitive=true
     no_uri_pattern_no_global_pattern=true
 
     [hashtaglist]
