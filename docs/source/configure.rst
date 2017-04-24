@@ -40,7 +40,7 @@ In order to configure Feed2toot, you need to create a feed2toot.ini file (or any
     no_uri_pattern_no_global_pattern=true
 
     [hashtaglist]
-    several_words_hashtags_list: /etc/feed2toot/hashtags.txt
+    several_words_hashtags_list=/etc/feed2toot/hashtags.txt
 
 For the [mastodon] section:
 
