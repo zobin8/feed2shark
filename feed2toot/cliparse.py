@@ -71,7 +71,7 @@ class CliParse(object):
                             logging, INFO if --syslog is specified without
                             argument""")
         parser.add_argument('--hashtaglist', dest='hashtaglist',
-                            help='a list of hashtag to match')
+                            help='a list of hashtags to match')
         parser.add_argument('-p', '--populate-cache', action='store_true', default=False,
                             dest='populate',
                             help='populate RSS entries in cache without actually posting them to Mastodon')
