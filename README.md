@@ -6,8 +6,8 @@ For the full documentation, [read it online](https://feed2toot.readthedocs.org/e
 If you would like, you can [support the development of this project on Liberapay](https://liberapay.com/carlchenet/).
 Alternatively you can donate cryptocurrencies:
 
-- BTC: 1BcdXCcLKN9PRpp6qw23FYkYuVp59dKZix
-- XMR: 4Cxwvw9V6yUehv832FWPTF7FSVuWjuBarFd17QP163uxMaFyoqwmDf1aiRtS5jWgCiRsi73yqedNJJ6V1La2joznUDzkmvBr6KKHT7Dvzj
+- BTC: 1MaFaUbmJcTVN9wsm5bzqFyq6zWu434X3A
+- XMR: 43GGv8KzVhxehv832FWPTF7FSVuWjuBarFd17QP163uxMaFyoqwmDf1aiRtS5jWgCiRsi73yqedNJJ6V1La2joznKHGAhDi
 
 ### Quick Install
 
