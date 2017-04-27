@@ -64,7 +64,16 @@ For the [rss] section:
 
 For the [hashtaglist] section:
 
-- several_words_hashtags_list: a path to the file containing hashtags in two or more words. Absolute path is mandatory. By default Feed2toot adds a # before every words of a hashtag.
+- several_words_hashtags_list: a path to the file containing hashtags in two or more words. Absolute path is mandatory. By default Feed2toot adds a # before every words of a hashtag. See documentation below for an example of this file.
+
+Example of the list of hash tags
+================================
+The list of hash tags is a simple text file with one hash tag composed by several words on a single line::
+
+    free software community
+    open-source
+
+Instead of having #free #software #community or #open-source in the resulting toot, you will have #freesoftwarecommunity and #opensource. You only have to identify the hash tags you frequently use in your RSS feeds and put them in this file to have well formatted hash tags in your toots.
 
 List of rss feeds
 =================

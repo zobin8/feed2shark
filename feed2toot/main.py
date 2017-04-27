@@ -75,10 +75,12 @@ class Main(object):
             plugins = conf[4]
             # create link to the persistent list
             cache = FeedCache(options)
-            if options['hashtaglist']:
+            if 'hashtaglist' in options and options['hashtaglist']:
                 severalwordshashtags = codecs.open(options['hashtaglist'],
                                                    encoding='utf-8').readlines()
                 severalwordshashtags = [i.rstrip('\n') for i in severalwordshashtags]
+            else:
+                severalwordshashtags = []
             # reverse feed entries because most recent one should be sent as the last one in Mastodon
             for feed in feeds:
                 # store the patterns by rss

@@ -191,12 +191,13 @@ class ConfParse(object):
             if not self.clioptions.hashtaglist:
                 confoption = 'several_words_hashtags_list'
                 if config.has_section(section):
-                    options['hashtaglist'] = config.get(section, confoption)
-                    options['hashtaglist'] = os.path.expanduser(options['hashtaglist'])
-                    if not os.path.exists(options['hashtaglist']) or not os.path.isfile(options['hashtaglist']):
-                        sys.exit('The path to the several_words_hashtags_list parameter is not valid: {hashtaglist}'.format(hashtaglist=options['hashtaglist']))
+                    if config.has_option(section, confoption):
+                        options['hashtaglist'] = config.get(section, confoption)
+                        options['hashtaglist'] = os.path.expanduser(options['hashtaglist'])
+                        if not os.path.exists(options['hashtaglist']) or not os.path.isfile(options['hashtaglist']):
+                            sys.exit('The path to the several_words_hashtags_list parameter is not valid: {hashtaglist}'.format(hashtaglist=options['hashtaglist']))
                 else:
-                    options['hashtaglist'] = False
+                    options['hashtaglist'] = ''
             ###########################
             # 
             # the plugins section
