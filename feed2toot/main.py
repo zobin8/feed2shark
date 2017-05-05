@@ -99,20 +99,35 @@ class Main(object):
                 # cache the ids of last rss feeds
                 if not clioptions.all:
                     for i in entries:
-                        if 'id' in i and i['id'] not in cache.getdeque():
-                            totweet.append(i)
+                        if 'id' in i:
+                            if i['id'] not in cache.getdeque():
+                                totweet.append(i)
+                        elif 'guid' in i:
+                            if i['guid'] not in cache.getdeque():
+                                totweet.append(i)
+                        else:
+                            # if id or guid not in the entry, use link
+                            if i['link'] not in cache.getdeque():
+                                totweet.append(i)
                 else:
                     totweet = entries
 
                 for entry in totweet:
-                    if 'id' not in entry:
-                        # malformed feed entry, skip
-                        continue
-                    logging.debug('found feed entry {entryid}'.format(entryid=entry['id']))
-
-                    rss = {
-                        'id': entry['id'],
-                    }
+                    if 'id' in entry:
+                        logging.debug('found feed entry {entryid}'.format(entryid=entry['id']))
+                        rss = {
+                            'id': entry['id'],
+                        }
+                    elif 'guid' in entry:
+                        logging.debug('found feed entry {entryid}'.format(entryid=entry['guid']))
+                        rss = {
+                            'id': entry['guid'],
+                        }
+                    else:
+                        logging.debug('found feed entry {entryid}'.format(entryid=entry['link']))
+                        rss = {
+                            'id': entry['link'],
+                        }
 
                     severalwordsinhashtag = False
                     # lets see if the rss feed has hashtag
