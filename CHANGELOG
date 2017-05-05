@@ -1,3 +1,7 @@
+## [0.5] - 2017-05-05
+### Added
+- manage rss feeds entries without id
+
 ## [0.4] - 2017-04-28
 ### Changed
 - [hashtaglist] section is not mandatory any more
