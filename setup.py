@@ -31,15 +31,15 @@ CLASSIFIERS = [
 
 setup(
     name='feed2toot',
-    version='0.4',
+    version='0.5',
     license='GNU GPL v3',
     description='Parse rss feed and tweet new posts to Mastodon',
     long_description='Parse rss feed and tweet new posts to the Mastodon social network',
     author = 'Carl Chenet',
     author_email = 'chaica@ohmytux.com',
-    url = 'https://github.com/chaica/feed2toot',
+    url = 'https://gitlab.com/chaica/feed2toot',
     classifiers=CLASSIFIERS,
-    download_url='https://github.com/chaica/feed2toot',
+    download_url='https://gitlab.com/chaica/feed2toot',
     packages=find_packages(),
     scripts=['scripts/feed2toot', 'scripts/register_feed2toot_app'],
     install_requires=['feedparser', 'Mastodon.py'],
