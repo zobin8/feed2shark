@@ -21,10 +21,10 @@ from mastodon import Mastodon
 from mastodon.Mastodon import MastodonIllegalArgumentError
 import sys
 
-print('\nThis app generates Mastodon app credentials needed by Feed2toot.\nfeed2toot_clientcred.txt and feed2toot_usercred.txt will be written in the current dir {cwd}.\nOne connection is initiated to create the app.\nYour password is *not* stored.\n'.format(cwd=getcwd()))
+print('\nThis script generates the Mastodon application credentials for Feed2toot.\nfeed2toot_clientcred.txt and feed2toot_usercred.txt will be written\nin the current directory: {cwd}.\nA connection is initiated to create the application.\nYour password is *not* stored.\n'.format(cwd=getcwd()))
 
 # get the instance
-instance = input('Mastodon instance url (defaults to https://mastodon.social):')
+instance = input('Mastodon instance URL (defaults to https://mastodon.social): ')
 if not instance:
     instance = 'https://mastodon.social'
 elif not instance.startswith('http'):
@@ -33,18 +33,18 @@ elif not instance.startswith('http'):
 # get the username
 userok = False
 while not userok:
-    user = input('Mastodon login:')
+    user = input('Mastodon login: ')
     if not user:
-        print('Your Mastodon username can not be empty')
+        print('Your Mastodon username can not be empty.')
         userok = False
     elif '@' not in user or '.' not in user:
-        print('Your Mastodon username should be an email')
+        print('Your Mastodon username should be an email.')
         userok = False
     else:
         userok = True
 
 # get the password
-password = getpass(prompt='Mastodon password:')
+password = getpass(prompt='Mastodon password: ')
 Mastodon.create_app(
      'feed2toot',
       api_base_url=instance,
@@ -60,6 +60,6 @@ try:
     )
 except MastodonIllegalArgumentError as err:
     print(err)
-    sys.exit('\nMy guess is bad login/password\n')
-print('The feed2toot app was added to your preferences=>authorized apps page')
+    sys.exit('\nI guess you entered a bad login or password.\n')
+print('feed2toot was added to your preferences=>authorized apps page.')
 sys.exit(0)
