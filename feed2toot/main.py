@@ -189,13 +189,21 @@ class Main(object):
                         
                     if clioptions.dryrun:
                         if entrytosend:
-                            logging.warning('Tweet should have been sent: {tweet}'.format(tweet=finaltweet))
+                            logging.warning('Would toot with visibility "{visibility}": {toot}'.format(
+                                toot=finaltweet,
+                                visibility=config.get(
+                                    'mastodon', 'toot_visibility',
+                                    fallback='public')))
                         else:
                             logging.debug('This rss entry did not meet pattern criteria. Should have not been sent')
                     else:
                         storeit = True
                         if entrytosend and not clioptions.populate:
-                            logging.debug('sending the following tweet:{tweet}'.format(tweet=finaltweet))
+                            logging.debug('Tooting with visibility "{visibility}": {toot}'.format(
+                                toot=finaltweet,
+                                visibility=config.get(
+                                    'mastodon', 'toot_visibility',
+                                    fallback='public')))
                             twp = TootPost(config, finaltweet)
                             storeit = twp.storeit()
                         else:

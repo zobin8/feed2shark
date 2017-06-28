@@ -26,6 +26,8 @@ In order to configure Feed2toot, you need to create a feed2toot.ini file (or any
     ; Here you need the two files created by register_feed2toot_app
     user_credentials=/etc/feed2toot/credentials/feed2toot_usercred.txt
     client_credentials=/etc/feed2toot/credentials/feed2toot_clientcred.txt
+    ; Default visibility is public, but you can override it
+    toot_visibility=unlisted
 
     [cache]
     cachefile=/var/lib/feed2toot/feed2toot.db
