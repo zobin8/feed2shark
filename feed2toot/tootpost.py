@@ -44,7 +44,9 @@ class TootPost:
             access_token = self.config.get('mastodon', 'user_credentials'),
             api_base_url = self.config.get('mastodon', 'instance_url')
         )
-        mastodon.toot(self.toot)
+        mastodon.status_post(self.toot,
+            visibility=self.config.get(
+                'mastodon', 'toot_visibility', fallback='public'))
 
     def storeit(self):
         '''Indicate if the tweet should be stored or not'''

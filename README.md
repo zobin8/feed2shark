@@ -40,6 +40,8 @@ Alternatively you can donate cryptocurrencies:
         instance_url=https://mastodon.social
         user_credentials=feed2toot_usercred.txt
         client_credentials=feed2toot_clientcred.txt
+        ; Default visibility is public, but you can override it:
+        ; toot_visibility=unlisted
 
         [cache]
         cachefile=cache.db
