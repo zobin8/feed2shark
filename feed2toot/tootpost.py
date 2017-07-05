@@ -30,11 +30,12 @@ from mastodon import Mastodon
 class TootPost:
     '''TootPost class'''
 
-    def __init__(self, config, toot):
+    def __init__(self, config, toot, img_list):
         '''Constructore of the TootPost class'''
         self.config = config
         self.store = True
         self.toot = toot
+        self.img_list = img_list
         self.main()
 
     def main(self):
@@ -44,9 +45,16 @@ class TootPost:
             access_token = self.config.get('mastodon', 'user_credentials'),
             api_base_url = self.config.get('mastodon', 'instance_url')
         )
+        medias_dicts = []
+        if len(self.img_list) > 0:
+            for img in self.img_list:
+                medias_dicts.append(mastodon.media_post(img.data,
+                                                img.headers['content-type']))
+
         mastodon.status_post(self.toot,
             visibility=self.config.get(
-                'mastodon', 'toot_visibility', fallback='public'))
+            'mastodon', 'toot_visibility', fallback='public'),
+            media_ids=medias_dicts)
 
     def storeit(self):
         '''Indicate if the tweet should be stored or not'''

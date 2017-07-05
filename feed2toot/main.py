@@ -23,6 +23,8 @@ import logging
 import logging.handlers
 import os
 import sys
+import re
+import urllib3
 
 # 3rd party libraries imports
 import feedparser
@@ -61,6 +63,10 @@ class Main(object):
 
     def main(self):
         """The main function."""
+        # regex to retrieve urls in <img> tags
+        regex = re.compile(r"<img[^>]+src=\"([^\">]+)\"")
+        http = urllib3.PoolManager()
+
         clip = CliParse()
         clioptions = clip.options
         self.setup_logging(clioptions)
@@ -129,6 +135,16 @@ class Main(object):
                             'id': entry['link'],
                         }
 
+                    # get images contained in the entry
+                    images = []
+                    if 'summary' in entry:
+                        list_img_urls = regex.findall(entry['summary'])
+                        if len(list_img_urls) > 0:
+                            for img_url in list_img_urls:
+                                resp = http.request('GET', img_url, preload_content=False)
+                                images.append(resp)
+                                resp.release_conn()
+
                     severalwordsinhashtag = False
                     # lets see if the rss feed has hashtag
                     if 'tags' in entry:
@@ -186,7 +202,6 @@ class Main(object):
                             finaltweet = addtag.finaltweet
                         else:
                             finaltweet = dedup.finaltweet
-                        
                     if clioptions.dryrun:
                         if entrytosend:
                             logging.warning('Would toot with visibility "{visibility}": {toot}'.format(
@@ -204,7 +219,7 @@ class Main(object):
                                 visibility=config.get(
                                     'mastodon', 'toot_visibility',
                                     fallback='public')))
-                            twp = TootPost(config, finaltweet)
+                            twp = TootPost(config, finaltweet, images)
                             storeit = twp.storeit()
                         else:
                             logging.debug('populating RSS entry {}'.format(rss['id']))
@@ -219,7 +234,7 @@ class Main(object):
                                 pluginmodulename = 'feed2toot.plugins.{pluginmodule}'.format(pluginmodule=pluginclassname.lower())
                                 try:
                                     pluginmodule = importlib.import_module(pluginmodulename)
-                                    pluginclass = getattr(pluginmodule, pluginclassname) 
+                                    pluginclass = getattr(pluginmodule, pluginclassname)
                                     pluginclass(plugins[plugin], finaltweet)
                                 except ImportError as err:
                                     print(err)
