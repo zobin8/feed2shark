@@ -63,8 +63,9 @@ class Main(object):
 
     def main(self):
         """The main function."""
-        # regex to retrieve urls in <img> tags
-        regex = re.compile(r"<img[^>]+src=\"([^\">]+)\"")
+        # regex_img_src to retrieve urls in <img> tags
+        regex_img_src = re.compile(r"<a\s+(?:[^>]*?\s+)?href=[\"'](.*?)[\"']|<img[^>]+src=\"([^\">]+)\"")
+        regex_strip_urls = re.compile(r"([a-z]+\.twitter\.com(\/\S+)?|https?:\/\/twitter\.com((\/\w+)?)+)")
         http = urllib3.PoolManager()
 
         clip = CliParse()
@@ -138,12 +139,17 @@ class Main(object):
                     # get images contained in the entry
                     images = []
                     if 'summary' in entry:
-                        list_img_urls = regex.findall(entry['summary'])
+                        list_img_urls = regex_img_src.findall(entry['summary'])
                         if len(list_img_urls) > 0:
-                            for img_url in list_img_urls:
-                                resp = http.request('GET', img_url, preload_content=False)
-                                images.append(resp)
-                                resp.release_conn()
+                            for img_url_tuple in list_img_urls:
+                                for url in img_url_tuple:
+                                    if url != None and url != '':
+                                        resp = http.request('GET', url, preload_content=False)
+                                        if resp.headers['content-type'].startswith("image") or resp.headers['content-type'].startswith("video"):
+                                            logging.debug('Found media (type={type_media}) at url {url}'.format(type_media=resp.headers['content-type'], url=url))
+                                            images.append(resp)
+                                            resp.release_conn()
+
 
                     severalwordsinhashtag = False
                     # lets see if the rss feed has hashtag
