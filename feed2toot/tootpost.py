@@ -48,8 +48,9 @@ class TootPost:
         medias_dicts = []
         if len(self.img_list) > 0:
             for img in self.img_list:
-                medias_dicts.append(mastodon.media_post(img.data,
-                                                img.headers['content-type']))
+                media_dict = mastodon.media_post(img.data, img.headers['content-type'])
+                if ('error' not in media_dict):
+                    medias_dicts.append(media_dict)
 
         mastodon.status_post(self.toot,
             visibility=self.config.get(

@@ -65,7 +65,6 @@ class Main(object):
         """The main function."""
         # regex_img_src to retrieve urls in <img> tags
         regex_img_src = re.compile(r"<a\s+(?:[^>]*?\s+)?href=[\"'](.*?)[\"']|<img[^>]+src=\"([^\">]+)\"")
-        regex_strip_urls = re.compile(r"([a-z]+\.twitter\.com(\/\S+)?|https?:\/\/twitter\.com((\/\w+)?)+)")
         http = urllib3.PoolManager()
 
         clip = CliParse()
@@ -149,7 +148,6 @@ class Main(object):
                                             logging.debug('Found media (type={type_media}) at url {url}'.format(type_media=resp.headers['content-type'], url=url))
                                             images.append(resp)
                                             resp.release_conn()
-
 
                     severalwordsinhashtag = False
                     # lets see if the rss feed has hashtag
