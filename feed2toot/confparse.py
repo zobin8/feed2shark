@@ -23,6 +23,7 @@ import os
 import os.path
 import socket
 import sys
+import re
 
 # 3rd party library imports
 import feedparser
@@ -46,9 +47,9 @@ class ConfParse(object):
             if not config.read(os.path.expanduser(pathtoconfig)):
                 sys.exit('Could not read config file')
             ###########################
-            # 
+            #
             # the rss section
-            # 
+            #
             ###########################
             section = 'rss'
             if config.has_section(section):
@@ -101,6 +102,12 @@ class ConfParse(object):
                     for line in rsslist:
                         line = line.strip()
                         # split each line in two parts, rss link and a string with the different patterns to look for
+                        feedname = None
+                        if '<' in line:
+                            matches = re.match('(.*) <(.*)>', line)
+                            if not matches:
+                                sys.exit('This line in the list of uri to parse is not formatted correctly: {line}'.format(line))
+                            feedname, line = matches.groups()
                         confobjects = line.split('|')
                         if len(confobjects) > 3 or len(confobjects) == 2:
                             sys.exit('This line in the list of uri to parse is not formatted correctly: {line}'.format(line))
@@ -124,7 +131,7 @@ class ConfParse(object):
                                 sys.exit('The rss object {rssobject} could not be found in the feed {rss}'.format(rssobject=rssobject, rss=rss))
                         else:
                             sys.exit('The rss feed {rss} does not seem to be valid'.format(rss=rss))
-                        feeds.append({'feed': feed, 'patterns': patterns, 'rssobject': rssobject})
+                        feeds.append({'feed': feed, 'patterns': patterns, 'rssobject': rssobject, 'feedname': feedname})
                     # test if all feeds in the list were unsuccessfully retrieved and if so, leave
                     if not feeds and bozoexception:
                         sys.exit('No feed could be retrieved. Leaving.')
@@ -153,9 +160,9 @@ class ConfParse(object):
                 if config.has_option(section, currentoption):
                     options['nopatternurinoglobalpattern'] = config.getboolean(section, currentoption)
             ###########################
-            # 
+            #
             # the cache section
-            # 
+            #
             ###########################
             section = 'cache'
             if not self.clioptions.cachefile:
@@ -183,9 +190,9 @@ class ConfParse(object):
             else:
                 options['cache_limit'] = 100
             ###########################
-            # 
+            #
             # the hashtag section
-            # 
+            #
             ###########################
             section = 'hashtaglist'
             if not self.clioptions.hashtaglist:
@@ -199,9 +206,9 @@ class ConfParse(object):
                 else:
                     options['hashtaglist'] = ''
             ###########################
-            # 
+            #
             # the plugins section
-            # 
+            #
             ###########################
             plugins = {}
             section = 'influxdb'
@@ -228,7 +235,7 @@ class ConfParse(object):
                 self.confs.append((options, config, self.tweetformat, feeds, plugins))
             else:
                 self.confs.append((options, config, self.tweetformat, [{'feed': feed, 'patterns': [], 'rssobject': ''}], plugins))
-        
+
     @property
     def confvalues(self):
         '''Return the values of the different configuration files'''

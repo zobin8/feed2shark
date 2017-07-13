@@ -5,7 +5,7 @@ As a prerequisite to use Feed2toot, you need to authorize a Mastodon app for you
 
 Just use the script register_feed2toot_app to register the feed2toot app for your account.::
 
-    $ ./register_feed2toot_app 
+    $ ./register_feed2toot_app
 
     This app generates Mastodon app credentials needed by Feed2toot.
     feed2toot_clientcred.txt and feed2toot_usercred.txt will be written in the current dir /home/chaica/progra/python/feed2toot.
@@ -99,6 +99,15 @@ Now let's have a look at the =/home/john/feed2toot/rsslist.txt file::
     https://carlchenet.com/feed
 
 Each line of this file is a url to a rss feed. Pretty simple.
+
+Display the name of the feed in the toots
+-----------------------------------------
+
+If you want to display the name of the feed in the resulting toot, you can do so by giving it a name with the following syntax::
+
+    Le journal du hacker <https://www.journalduhacker.net/rss/>
+
+Then in the `tweet` configuration, you can use the `{feedname}` syntax, which will be replaced by the actual name of the feed.
 
 Match specific patterns of rss feeds in the uri_list files
 ----------------------------------------------------------
