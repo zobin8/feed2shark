@@ -44,6 +44,9 @@ In order to configure Feed2toot, you need to create a feed2toot.ini file (or any
     [hashtaglist]
     several_words_hashtags_list=/etc/feed2toot/hashtags.txt
 
+    [feedparser]
+    accept_bozo_exceptions=true
+
 For the [mastodon] section:
 
 - instance_url: the url of your Mastodon instance
@@ -73,6 +76,10 @@ For the [rss] section:
 For the [hashtaglist] section:
 
 - several_words_hashtags_list: a path to the file containing hashtags in two or more words. Absolute path is mandatory. By default Feed2toot adds a # before every words of a hashtag. See documentation below for an example of this file.
+
+for the [feedparser] section:
+
+- accept_bozo_exceptions: If set to true, feed2toot will accept malformed feeds, which are rejected by default.
 
 Example of the list of hash tags
 ================================

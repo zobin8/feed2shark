@@ -45,6 +45,13 @@ class ConfParse(object):
             config = SafeConfigParser()
             if not config.read(os.path.expanduser(pathtoconfig)):
                 sys.exit('Could not read config file')
+
+            # The feedparser section
+            if config.has_option('feedparser', 'accept_bozo_exceptions'):
+                self.accept_bozo_exceptions = config.getboolean('feedparser', 'accept_bozo_exceptions')
+            else:
+                self.accept_bozo_exceptions = False
+
             ###########################
             # 
             # the rss section
@@ -117,7 +124,8 @@ class ConfParse(object):
                         if 'bozo_exception' in feed:
                             bozoexception = True
                             logging.warning(feed['bozo_exception'])
-                            continue
+                            if not self.accept_bozo_exceptions:
+                                continue
                         # check if the rss feed and the rss entry are valid ones
                         if 'entries' in feed:
                             if rssobject and rssobject not in feed['entries'][0].keys():
