@@ -25,7 +25,7 @@ import sys
 
 __version__ = '0.5'
 
-class CliParse(object):
+class CliParse:
     '''CliParse class'''
     def __init__(self):
         '''Constructor for the CliParse class'''
@@ -34,7 +34,7 @@ class CliParse(object):
     def main(self):
         '''main of CliParse class'''
         feed2tootepilog = 'For more information: https://feed2toot.readhthedocs.org'
-        feed2tootdescription = 'Take rss feed and send it to Mastodon' 
+        feed2tootdescription = 'Take rss feed and send it to Mastodon'
         parser = ArgumentParser(prog='feed2toot',
                                 description=feed2tootdescription,
                                 epilog=feed2tootepilog)
@@ -63,7 +63,7 @@ class CliParse(object):
                             action='store_const', const='debug', default='warning',
                             help='enable debug output, work on log level DEBUG')
         levels = [i for i in logging._nameToLevel.keys()
-        if (type(i) == str and i != 'NOTSET')]
+                  if (type(i) == str and i != 'NOTSET')]
         parser.add_argument('--syslog', nargs='?', default=None,
                             type=str.upper, action='store',
                             const='INFO', choices=levels,

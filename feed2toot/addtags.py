@@ -20,7 +20,7 @@
 # standard library imports
 from operator import itemgetter
 
-class AddTags(object):
+class AddTags:
     '''Add as many tags as possible depending on the tweet length'''
     def __init__(self, tweet, tags):
         '''Constructor of AddTags class'''
@@ -34,14 +34,14 @@ class AddTags(object):
         tweetlength = len(self.tweet)
 
         # sort list of tags, the ones with the greater length first
-        tagswithindices = ({'text':i, 'length':len(i)} for i in self.tags)
+        tagswithindices = ({'text':i, 'length': len(i)} for i in self.tags)
         sortedtagswithindices = sorted(tagswithindices, key=itemgetter('length'), reverse=True)
         self.tags = (i['text'] for i in sortedtagswithindices)
 
         # add tags is space is available
         for tag in self.tags:
             taglength = len(tag)
-            if (tweetlength + (taglength +1)) <= maxlength:
+            if (tweetlength + (taglength + 1)) <= maxlength:
                 self.tweet = ' '.join([self.tweet, tag])
                 tweetlength += (taglength + 1)
 

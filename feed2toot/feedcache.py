@@ -38,9 +38,9 @@ class FeedCache:
             with open(self.options['cachefile']) as dbdsc:
                 dbfromfile = dbdsc.readlines()
             dblist = [i.strip() for i in dbfromfile]
-            self.dbfeed = deque(dblist, self.options['cache_limit'] )
+            self.dbfeed = deque(dblist, self.options['cache_limit'])
         else:
-            self.dbfeed = deque([], self.options['cache_limit'] )
+            self.dbfeed = deque([], self.options['cache_limit'])
 
     def append(self, rssid):
         '''Append a rss id to the cache'''

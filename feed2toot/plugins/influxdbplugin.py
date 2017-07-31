@@ -16,9 +16,6 @@
 # Push values to a influxdb database
 '''Push values to a influxdb database'''
 
-# standard libraries imports
-import json
-
 # 3rd party libraries imports
 from influxdb import InfluxDBClient
 
@@ -30,13 +27,16 @@ class InfluxdbPlugin(object):
         self.data = data
         self.datatoinfluxdb = []
         self.client = InfluxDBClient(self.plugininfo['host'],
-                                self.plugininfo['port'],
-                                self.plugininfo['user'],
-                                self.plugininfo['pass'],
-                                self.plugininfo['database'])
+            self.plugininfo['port'],
+            self.plugininfo['user'],
+            self.plugininfo['pass'],
+            self.plugininfo['database'])
         self.main()
 
     def main(self):
         '''Main of the PiwikModule class'''
-        self.datatoinfluxdb.append({'measurement': self.plugininfo['measurement'], 'fields': {'value': self.data}})
+        self.datatoinfluxdb.append({
+            'measurement': self.plugininfo['measurement'],
+            'fields': {'value': self.data}
+        })
         self.client.write_points(self.datatoinfluxdb)

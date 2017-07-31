@@ -17,18 +17,17 @@
 '''Get values of the configuration file'''
 
 # standard library imports
-from configparser import SafeConfigParser, NoOptionError, NoSectionError
+from configparser import SafeConfigParser
 import logging
 import os
 import os.path
-import socket
 import sys
 import re
 
 # 3rd party library imports
 import feedparser
 
-class ConfParse(object):
+class ConfParse:
     '''ConfParse class'''
     def __init__(self, clioptions):
         '''Constructor of the ConfParse class'''
@@ -46,7 +45,6 @@ class ConfParse(object):
             config = SafeConfigParser()
             if not config.read(os.path.expanduser(pathtoconfig)):
                 sys.exit('Could not read config file')
-
             # The feedparser section
             if config.has_option('feedparser', 'accept_bozo_exceptions'):
                 self.accept_bozo_exceptions = config.getboolean('feedparser', 'accept_bozo_exceptions')
@@ -185,7 +183,7 @@ class ConfParse(object):
                     sys.exit('The parent directory of the cache file does not exist: {cachefileparent}'.format(cachefileparent=cachefileparent))
             else:
                 options['cachefile'] = self.clioptions.cachefile
-            ### cache limit
+            # cache limit
             if config.has_section(section):
                 confoption = 'cache_limit'
                 if config.has_option(section, confoption):
@@ -225,7 +223,7 @@ class ConfParse(object):
                 # host, port, user, pass, database options
                 ##########################################
                 plugins[section] = {}
-                for currentoption in ['host','port','user','pass','database']:
+                for currentoption in ['host', 'port', 'user', 'pass', 'database']:
                     if config.has_option(section, currentoption):
                         plugins[section][currentoption] = config.get(section, currentoption)
                 if 'host' not in plugins[section]:
@@ -234,7 +232,7 @@ class ConfParse(object):
                     plugins[section]['port'] = 8086
                 if 'measurement' not in plugins[section]:
                     plugins[section]['measurement'] = 'tweets'
-                for field in ['user','pass','database']:
+                for field in ['user', 'pass', 'database']:
                     if field not in plugins[section]:
                         sys.exit('Parsing error for {field} in the [{section}] section: {field} is not defined'.format(field=field, section=section))
 
