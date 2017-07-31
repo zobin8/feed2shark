@@ -173,7 +173,7 @@ class Main(object):
                                 tmpelement = i.strip('{}')
                                 elements.append(tmpelement)
                     # match elements of the tweet format string with available element in the RSS feed
-                    fe = FilterEntry(elements, entry, options, feed['patterns'], feed['rssobject'])
+                    fe = FilterEntry(elements, entry, options, feed['patterns'], feed['rssobject'], feed['feedname'])
                     entrytosend = fe.finalentry
                     if entrytosend:
                         tweetwithnotag = tweetformat.format(**entrytosend)
@@ -186,7 +186,7 @@ class Main(object):
                             finaltweet = addtag.finaltweet
                         else:
                             finaltweet = dedup.finaltweet
-                        
+
                     if clioptions.dryrun:
                         if entrytosend:
                             logging.warning('Would toot with visibility "{visibility}": {toot}'.format(
@@ -219,7 +219,7 @@ class Main(object):
                                 pluginmodulename = 'feed2toot.plugins.{pluginmodule}'.format(pluginmodule=pluginclassname.lower())
                                 try:
                                     pluginmodule = importlib.import_module(pluginmodulename)
-                                    pluginclass = getattr(pluginmodule, pluginclassname) 
+                                    pluginclass = getattr(pluginmodule, pluginclassname)
                                     pluginclass(plugins[plugin], finaltweet)
                                 except ImportError as err:
                                     print(err)

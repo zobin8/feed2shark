@@ -27,7 +27,7 @@ import feedparser
 
 class FilterEntry(object):
     '''FilterEntry class'''
-    def __init__(self, elements, entry, options, byrsspatterns, rssobject):
+    def __init__(self, elements, entry, options, byrsspatterns, rssobject, feedname):
         '''Constructor of the FilterEntry class'''
         self.matching = {}
         self.entry = entry
@@ -35,15 +35,20 @@ class FilterEntry(object):
         self.options = options
         self.byrsspatterns = byrsspatterns
         self.rssobject = rssobject
+        self.feedname = feedname
         self.main()
 
     def main(self):
         '''Main of the FilterEntry class'''
+        authorized_elements = ['feedname', ]
+        authorized_elements.extend(self.entry.keys())
         for i in self.elements:
-            if i not in self.entry:
+            if i not in authorized_elements:
                 sys.exit('The element {} is not available in the RSS feed. The available ones are: {}'.format(i, [j for j in self.entry]))
             # for the case if no pattern at all is defined
-            if not self.options['patterns'] and not self.byrsspatterns and not self.rssobject:
+            if i == 'feedname':
+                self.matching[i] = self.feedname
+            elif not self.options['patterns'] and not self.byrsspatterns and not self.rssobject:
                 self.matching[i] = self.entry[i]
             # global filter only
             elif self.options['patterns'] and not self.byrsspatterns and not self.rssobject:
@@ -67,7 +72,7 @@ class FilterEntry(object):
             if not self.options['patternscasesensitive']['{}_case_sensitive'.format(patternlist)]:
                 # not case sensitive, so we compare the lower case
                 for pattern in self.options['patterns'][patternlist]:
-                    finalpattern = pattern.lower() 
+                    finalpattern = pattern.lower()
                     finaltitle = self.entry[patternlist.split('_')[0]].lower()
                     if finalpattern in finaltitle:
                         self.matching[i] = self.entry[i]
