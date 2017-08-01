@@ -15,16 +15,7 @@
 
 """Checks an RSS feed and posts new entries to Mastodon."""
 
-# standard libraires imports
-from configparser import SafeConfigParser, NoOptionError, NoSectionError
-from argparse import ArgumentParser
-import codecs
-import logging
-import os
-import sys
-
 # 3rd party libraries imports
-import feedparser
 from mastodon import Mastodon
 
 class TootPost:
@@ -40,13 +31,12 @@ class TootPost:
     def main(self):
         '''Main of the TweetPost class'''
         mastodon = Mastodon(
-            client_id = self.config.get('mastodon', 'client_credentials'),
-            access_token = self.config.get('mastodon', 'user_credentials'),
-            api_base_url = self.config.get('mastodon', 'instance_url')
+            client_id=self.config.get('mastodon', 'client_credentials'),
+            access_token=self.config.get('mastodon', 'user_credentials'),
+            api_base_url=self.config.get('mastodon', 'instance_url')
         )
-        mastodon.status_post(self.toot,
-            visibility=self.config.get(
-                'mastodon', 'toot_visibility', fallback='public'))
+        toot_visibility = self.config.get('mastodon', 'toot_visibility', fallback='public')
+        mastodon.status_post(self.toot, visibility=toot_visibility)
 
     def storeit(self):
         '''Indicate if the tweet should be stored or not'''

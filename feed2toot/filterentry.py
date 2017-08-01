@@ -17,15 +17,9 @@
 '''Filter an entry of the RSS feeds'''
 
 # standard library imports
-from configparser import SafeConfigParser, NoOptionError, NoSectionError
-import os
-import os.path
 import sys
 
-# 3rd party library imports
-import feedparser
-
-class FilterEntry(object):
+class FilterEntry:
     '''FilterEntry class'''
     def __init__(self, elements, entry, options, byrsspatterns, rssobject, feedname):
         '''Constructor of the FilterEntry class'''

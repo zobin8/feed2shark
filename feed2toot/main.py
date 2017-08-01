@@ -21,11 +21,7 @@ import codecs
 import importlib
 import logging
 import logging.handlers
-import os
 import sys
-
-# 3rd party libraries imports
-import feedparser
 
 # app libraries imports
 from feed2toot.addtags import AddTags
@@ -36,7 +32,7 @@ from feed2toot.removeduplicates import RemoveDuplicates
 from feed2toot.tootpost import TootPost
 from feed2toot.feedcache import FeedCache
 
-class Main(object):
+class Main:
     '''Main class of Feed2toot'''
 
     def __init__(self):
@@ -164,7 +160,7 @@ class Main(object):
                                 nospace = nospace.replace(" ", "")
                                 rss['hashtags'].append('#{}'.format(nospace))
 
-                    elements=[]
+                    elements = []
                     for i in tweetformat.split(' '):
                         tmpelement = ''
                         # if i is not an empty string
