@@ -98,6 +98,11 @@ class CliParse:
         # verify if a configuration file is provided
         if not self.opts.configs:
             sys.exit('no configuration file was found at the specified path(s) with the option -c')
+        # verify the path to the hashtaglist
+        if self.opts.hashtaglist:
+            hashtaglist = os.path.expanduser(self.opts.hashtaglist)
+            if not os.path.exists(hashtaglist):
+                sys.exit('the {hashtaglist} file does not seem to exist, please provide a valid path'.format(hashtaglist=hashtaglist))
 
     @property
     def options(self):
