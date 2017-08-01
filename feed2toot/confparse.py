@@ -28,8 +28,13 @@ import re
 import feedparser
 
 # feed2toot library imports
+from feed2toot.confparsers.cache import parsecache
 from feed2toot.confparsers.hashtaglist import parsehashtaglist
+from feed2toot.confparsers.feedparser import parsefeedparser
 from feed2toot.confparsers.plugins import parseplugins
+from feed2toot.confparsers.rss.pattern import parsepattern
+from feed2toot.confparsers.rss.toot import parsetoot
+from feed2toot.confparsers.rss.urilist import parseurilist
 
 class ConfParse:
     '''ConfParse class'''
@@ -49,105 +54,25 @@ class ConfParse:
             config = SafeConfigParser()
             if not config.read(os.path.expanduser(pathtoconfig)):
                 sys.exit('Could not read config file')
-            # The feedparser section
-            if config.has_option('feedparser', 'accept_bozo_exceptions'):
-                self.accept_bozo_exceptions = config.getboolean('feedparser', 'accept_bozo_exceptions')
-            else:
-                self.accept_bozo_exceptions = False
+            ####################
+            # feedparser section
+            ####################
+            accept_bozo_exceptions = parsefeedparser(config)
             ###########################
-            #
             # the rss section
-            #
             ###########################
+            self.tweetformat = parsetoot(config)
+            #################################################
+            # pattern and patter_case_sensitive format option
+            #################################################
+            options['patterns'], options['patternscasesensitive'] = parsepattern(config)
+            #################
+            # uri_list option
+            #################
+            feeds = []
+            feeds = parseurilist(config, accept_bozo_exceptions)
             section = 'rss'
             if config.has_section(section):
-                ############################
-                # tweet option
-                ############################
-                oldconfoption = 'tweet'
-                confoption = 'toot'
-                # manage 'tweet' for compatibility reason with first versions
-                if config.has_option(section, oldconfoption):
-                    logging.warn("Your configuration file uses a 'tweet' parameter instead of 'toot'. 'tweet' is deprecated and will be removed in Feed2toot 0.7")
-                    self.tweetformat = config.get(section, oldconfoption)
-                elif config.has_option(section, confoption):
-                    self.tweetformat = config.get(section, confoption)
-                else:
-                    sys.exit('You should define a format for your tweet with the parameter "{confoption}" in the [{section}] section'.format(confoption=confoption, section=section))
-                #######################
-                # pattern format option
-                #######################
-                options['patterns'] = {}
-                options['patternscasesensitive'] = {}
-                for pattern in ['summary_detail', 'published_parsed', 'guidislink', 'authors', 'links', 'title_detail', 'author', 'author_detail', 'comments', 'published', 'summary', 'tags', 'title', 'link', 'id']:
-                    currentoption = '{}_pattern'.format(pattern)
-                    if config.has_option(section, currentoption):
-                        tmppattern = config.get(section, currentoption)
-                        if self.stringsep in tmppattern:
-                            options['patterns'][currentoption] = [i for i in tmppattern.split(self.stringsep) if i]
-                        else:
-                            options['patterns'][currentoption] = [tmppattern]
-
-                    ###############################
-                    # pattern_case_sensitive option
-                    ###############################
-                    currentoption = '{}_pattern_case_sensitive'.format(pattern)
-                    if config.has_option(section, currentoption):
-                        try:
-                            options['patternscasesensitive'][currentoption] = config.getboolean(section, currentoption)
-                        except ValueError as err:
-                            logging.warn(err)
-                            options['patternscasesensitive'][currentoption] = True
-                bozoexception = False
-                feeds = []
-                patterns = []
-                ################
-                # uri_list option
-                ################
-                currentoption = 'uri_list'
-                if config.has_option(section, currentoption):
-                    rssfile = config.get(section, currentoption)
-                    rssfile = os.path.expanduser(rssfile)
-                    if not os.path.exists(rssfile) or not os.path.isfile(rssfile):
-                        sys.exit('The path to the uri_list parameter is not valid: {rssfile}'.format(rssfile=rssfile))
-                    rsslist = open(rssfile, 'r').readlines()
-                    for line in rsslist:
-                        line = line.strip()
-                        # split each line in two parts, rss link and a string with the different patterns to look for
-                        feedname = ''
-                        if '<' in line:
-                            matches = re.match('(.*) <(.*)>', line)
-                            if not matches:
-                                sys.exit('This line in the list of uri to parse is not formatted correctly: {line}'.format(line))
-                            feedname, line = matches.groups()
-                        confobjects = line.split('|')
-                        if len(confobjects) > 3 or len(confobjects) == 2:
-                            sys.exit('This line in the list of uri to parse is not formatted correctly: {line}'.format(line))
-                        if len(confobjects) == 3:
-                            rss, rssobject, patternstring = line.split('|')
-                        if len(confobjects) == 1:
-                            rss = confobjects[0]
-                            rssobject = ''
-                            patternstring = ''
-                        # split different searched patterns
-                        patterns = [i for i in patternstring.split(self.stringsep) if i]
-                        # retrieve the content of the rss
-                        feed = feedparser.parse(rss)
-                        if 'bozo_exception' in feed:
-                            bozoexception = True
-                            logging.warning(feed['bozo_exception'])
-                            if not self.accept_bozo_exceptions:
-                                continue
-                        # check if the rss feed and the rss entry are valid ones
-                        if 'entries' in feed:
-                            if rssobject and rssobject not in feed['entries'][0].keys():
-                                sys.exit('The rss object {rssobject} could not be found in the feed {rss}'.format(rssobject=rssobject, rss=rss))
-                        else:
-                            sys.exit('The rss feed {rss} does not seem to be valid'.format(rss=rss))
-                        feeds.append({'feed': feed, 'patterns': patterns, 'rssobject': rssobject, 'feedname': feedname})
-                    # test if all feeds in the list were unsuccessfully retrieved and if so, leave
-                    if not feeds and bozoexception:
-                        sys.exit('No feed could be retrieved. Leaving.')
                 ############
                 # uri option
                 ############
@@ -182,38 +107,9 @@ class ConfParse:
                 if config.has_option(section, currentoption):
                     options['nopatternurinoglobalpattern'] = config.getboolean(section, currentoption)
             ###########################
-            #
             # the cache section
-            #
             ###########################
-            section = 'cache'
-            if not self.clioptions.cachefile:
-                ##################
-                # cachefile option
-                ##################
-                confoption = 'cachefile'
-                if config.has_section(section):
-                    options['cachefile'] = config.get(section, confoption)
-                else:
-                    sys.exit('You should provide a {confoption} parameter in the [{section}] section'.format(section=section, confoption=confoption))
-                options['cachefile'] = os.path.expanduser(options['cachefile'])
-                cachefileparent = os.path.dirname(options['cachefile'])
-                if cachefileparent and not os.path.exists(cachefileparent):
-                    sys.exit('The parent directory of the cache file does not exist: {cachefileparent}'.format(cachefileparent=cachefileparent))
-            else:
-                options['cachefile'] = self.clioptions.cachefile
-            # cache limit
-            if config.has_section(section):
-                confoption = 'cache_limit'
-                if config.has_option(section, confoption):
-                    try:
-                        options['cache_limit'] = int(config.get(section, confoption))
-                    except ValueError as err:
-                        sys.exit('Error in configuration with the {confoption} parameter in [{section}]: {err}'.format(confoption=confoption, section=section, err=err))
-                else:
-                    options['cache_limit'] = 100
-            else:
-                options['cache_limit'] = 100
+            options['cachefile'], options['cache_limit'] = parsecache(self.clioptions.cachefile, config)
             ###########################
             # the hashtag section
             ###########################
@@ -223,9 +119,7 @@ class ConfParse:
             ###########################
             plugins = parseplugins(config)
             ########################################
-            #
             # return the final configurations values
-            #
             ########################################
             if feeds:
                 self.confs.append((options, config, self.tweetformat, feeds, plugins))
