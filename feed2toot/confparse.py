@@ -50,7 +50,6 @@ class ConfParse:
                 self.accept_bozo_exceptions = config.getboolean('feedparser', 'accept_bozo_exceptions')
             else:
                 self.accept_bozo_exceptions = False
-
             ###########################
             #
             # the rss section
@@ -63,7 +62,9 @@ class ConfParse:
                 ############################
                 oldconfoption = 'tweet'
                 confoption = 'toot'
+                # manage 'tweet' for compatibility reason with first versions
                 if config.has_option(section, oldconfoption):
+                    logging.warn("Your configuration file uses a 'tweet' parameter instead of 'toot'. 'tweet' is deprecated and will be removed in Feed2toot 0.7")
                     self.tweetformat = config.get(section, oldconfoption)
                 elif config.has_option(section, confoption):
                     self.tweetformat = config.get(section, confoption)
