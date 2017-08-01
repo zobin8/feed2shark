@@ -27,6 +27,10 @@ import re
 # 3rd party library imports
 import feedparser
 
+# feed2toot library imports
+from feed2toot.confparsers.hashtaglist import parsehashtaglist
+from feed2toot.confparsers.plugins import parseplugins
+
 class ConfParse:
     '''ConfParse class'''
     def __init__(self, clioptions):
@@ -70,9 +74,9 @@ class ConfParse:
                     self.tweetformat = config.get(section, confoption)
                 else:
                     sys.exit('You should define a format for your tweet with the parameter "{confoption}" in the [{section}] section'.format(confoption=confoption, section=section))
-                ############################
+                #######################
                 # pattern format option
-                ############################
+                #######################
                 options['patterns'] = {}
                 options['patternscasesensitive'] = {}
                 for pattern in ['summary_detail', 'published_parsed', 'guidislink', 'authors', 'links', 'title_detail', 'author', 'author_detail', 'comments', 'published', 'summary', 'tags', 'title', 'link', 'id']:
@@ -84,20 +88,22 @@ class ConfParse:
                         else:
                             options['patterns'][currentoption] = [tmppattern]
 
-                    # pattern_case_sensitive format
+                    ###############################
+                    # pattern_case_sensitive option
+                    ###############################
                     currentoption = '{}_pattern_case_sensitive'.format(pattern)
                     if config.has_option(section, currentoption):
                         try:
                             options['patternscasesensitive'][currentoption] = config.getboolean(section, currentoption)
                         except ValueError as err:
-                            print(err)
+                            logging.warn(err)
                             options['patternscasesensitive'][currentoption] = True
-                ############################
-                # rsslist
-                ############################
                 bozoexception = False
                 feeds = []
                 patterns = []
+                ################
+                # uri_list option
+                ################
                 currentoption = 'uri_list'
                 if config.has_option(section, currentoption):
                     rssfile = config.get(section, currentoption)
@@ -142,9 +148,9 @@ class ConfParse:
                     # test if all feeds in the list were unsuccessfully retrieved and if so, leave
                     if not feeds and bozoexception:
                         sys.exit('No feed could be retrieved. Leaving.')
-                ############################
-                # uri
-                ############################
+                ############
+                # uri option
+                ############
                 if not feeds and not self.clioptions.rss_uri:
                     confoption = 'uri'
                     if config.has_option(section, confoption):
@@ -155,8 +161,6 @@ class ConfParse:
                             if not matches:
                                 sys.exit('This uri to parse is not formatted correctly: {urifeed}'.format(urifeed))
                             feedname, finaluri = matches.groups()
-                            print(feedname)
-                            print(finaluri)
                             options['rss_uri'] = finaluri
                         else:
                             options['rss_uri'] = config.get('rss', 'uri')
@@ -184,6 +188,9 @@ class ConfParse:
             ###########################
             section = 'cache'
             if not self.clioptions.cachefile:
+                ##################
+                # cachefile option
+                ##################
                 confoption = 'cachefile'
                 if config.has_section(section):
                     options['cachefile'] = config.get(section, confoption)
@@ -208,47 +215,18 @@ class ConfParse:
             else:
                 options['cache_limit'] = 100
             ###########################
-            #
             # the hashtag section
-            #
             ###########################
-            section = 'hashtaglist'
-            if not self.clioptions.hashtaglist:
-                confoption = 'several_words_hashtags_list'
-                if config.has_section(section):
-                    if config.has_option(section, confoption):
-                        options['hashtaglist'] = config.get(section, confoption)
-                        options['hashtaglist'] = os.path.expanduser(options['hashtaglist'])
-                        if not os.path.exists(options['hashtaglist']) or not os.path.isfile(options['hashtaglist']):
-                            sys.exit('The path to the several_words_hashtags_list parameter is not valid: {hashtaglist}'.format(hashtaglist=options['hashtaglist']))
-                else:
-                    options['hashtaglist'] = ''
+            options['hashtaglist'] = parsehashtaglist(self.clioptions.hashtaglist, config)
             ###########################
-            #
             # the plugins section
-            #
             ###########################
-            plugins = {}
-            section = 'influxdb'
-            if config.has_section(section):
-                ##########################################
-                # host, port, user, pass, database options
-                ##########################################
-                plugins[section] = {}
-                for currentoption in ['host', 'port', 'user', 'pass', 'database']:
-                    if config.has_option(section, currentoption):
-                        plugins[section][currentoption] = config.get(section, currentoption)
-                if 'host' not in plugins[section]:
-                    plugins[section]['host'] = '127.0.0.1'
-                if 'port' not in plugins[section]:
-                    plugins[section]['port'] = 8086
-                if 'measurement' not in plugins[section]:
-                    plugins[section]['measurement'] = 'tweets'
-                for field in ['user', 'pass', 'database']:
-                    if field not in plugins[section]:
-                        sys.exit('Parsing error for {field} in the [{section}] section: {field} is not defined'.format(field=field, section=section))
-
-            # create the returned object with previously parsed data
+            plugins = parseplugins(config)
+            ########################################
+            #
+            # return the final configurations values
+            #
+            ########################################
             if feeds:
                 self.confs.append((options, config, self.tweetformat, feeds, plugins))
             else:
