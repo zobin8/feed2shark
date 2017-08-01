@@ -107,7 +107,7 @@ class ConfParse:
                     for line in rsslist:
                         line = line.strip()
                         # split each line in two parts, rss link and a string with the different patterns to look for
-                        feedname = None
+                        feedname = ''
                         if '<' in line:
                             matches = re.match('(.*) <(.*)>', line)
                             if not matches:
@@ -147,7 +147,18 @@ class ConfParse:
                 if not feeds and not self.clioptions.rss_uri:
                     confoption = 'uri'
                     if config.has_option(section, confoption):
-                        options['rss_uri'] = config.get('rss', 'uri')
+                        urifeed = config.get('rss', 'uri')
+                        feedname = None
+                        if '<' in urifeed:
+                            matches = re.match('(.*) <(.*)>', urifeed)
+                            if not matches:
+                                sys.exit('This uri to parse is not formatted correctly: {urifeed}'.format(urifeed))
+                            feedname, finaluri = matches.groups()
+                            print(feedname)
+                            print(finaluri)
+                            options['rss_uri'] = finaluri
+                        else:
+                            options['rss_uri'] = config.get('rss', 'uri')
                     else:
                         sys.exit('{confoption} parameter in the [{section}] section of the configuration file is mandatory. Exiting.'.format(section=section, confoption=confoption))
                 else:
@@ -240,7 +251,7 @@ class ConfParse:
             if feeds:
                 self.confs.append((options, config, self.tweetformat, feeds, plugins))
             else:
-                self.confs.append((options, config, self.tweetformat, [{'feed': feed, 'patterns': [], 'rssobject': ''}], plugins))
+                self.confs.append((options, config, self.tweetformat, [{'feed': feed, 'patterns': [], 'rssobject': '', 'feedname': feedname}], plugins))
 
     @property
     def confvalues(self):
