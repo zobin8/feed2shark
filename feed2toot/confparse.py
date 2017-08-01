@@ -34,6 +34,7 @@ from feed2toot.confparsers.feedparser import parsefeedparser
 from feed2toot.confparsers.plugins import parseplugins
 from feed2toot.confparsers.rss.pattern import parsepattern
 from feed2toot.confparsers.rss.toot import parsetoot
+from feed2toot.confparsers.rss.uri import parseuri
 from feed2toot.confparsers.rss.urilist import parseurilist
 
 class ConfParse:
@@ -71,41 +72,10 @@ class ConfParse:
             #################
             feeds = []
             feeds = parseurilist(config, accept_bozo_exceptions)
-            section = 'rss'
-            if config.has_section(section):
-                ############
-                # uri option
-                ############
-                if not feeds and not self.clioptions.rss_uri:
-                    confoption = 'uri'
-                    if config.has_option(section, confoption):
-                        urifeed = config.get('rss', 'uri')
-                        feedname = None
-                        if '<' in urifeed:
-                            matches = re.match('(.*) <(.*)>', urifeed)
-                            if not matches:
-                                sys.exit('This uri to parse is not formatted correctly: {urifeed}'.format(urifeed))
-                            feedname, finaluri = matches.groups()
-                            options['rss_uri'] = finaluri
-                        else:
-                            options['rss_uri'] = config.get('rss', 'uri')
-                    else:
-                        sys.exit('{confoption} parameter in the [{section}] section of the configuration file is mandatory. Exiting.'.format(section=section, confoption=confoption))
-                else:
-                    options['rss_uri'] = self.clioptions.rss_uri
-                # get the rss feed for rss parameter of [rss] section
-                feed = feedparser.parse(options['rss_uri'])
-                if not feed:
-                    sys.exit('Unable to parse the feed at the following url: {rss}'.format(rss=rss))
-
-                #########################################
-                # no_uri_pattern_no_global_pattern option
-                #########################################
-                currentoption = 'no_uri_pattern_no_global_pattern'
-                # default value
-                options['nopatternurinoglobalpattern'] = False
-                if config.has_option(section, currentoption):
-                    options['nopatternurinoglobalpattern'] = config.getboolean(section, currentoption)
+            ############
+            # uri option
+            ############
+            options['rss_uri'], feed, feedname, options['nopatternurinoglobalpattern']  = parseuri(config, self.clioptions.rss_uri, feeds)
             ###########################
             # the cache section
             ###########################
