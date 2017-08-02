@@ -1,7 +1,7 @@
 ## [0.6] - 2017-08-02
 ### Added
 - define a name for a feed, accessible with {feedname}. Contributed by Alexis Metaireau.
-- switch the toot visibility by The Dod (@thedod)
+- switch the toot visibility. Contributed by The Dod.
 - new accept_bozo_exceptions option to allow malformed rss feeds. Contributed by Alexis Metaireau.
 
 ### Changed
