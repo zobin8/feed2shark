@@ -48,7 +48,7 @@ Alternatively you can donate cryptocurrencies:
 
         [rss]
         uri=https://www.journalduhacker.net/rss
-        tweet={title} {link}
+        toot={title} {link}
 
         [hashtaglist]
         several_words_hashtags_list=hashtags.txt
