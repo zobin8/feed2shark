@@ -28,7 +28,6 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3.6'
 ]
 
-
 setup(
     name='feed2toot',
     version='0.6',
