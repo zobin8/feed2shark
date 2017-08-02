@@ -4,7 +4,7 @@ Feed2toot supports plugins. Plugins offer optional features, not supported by de
 
 InfluxDB
 --------
-The InfluxDB plugin allows to store already published tweets in a InfluxDB database.
+The InfluxDB plugin allows to store already published toots in a InfluxDB database.
 
 Install the InfluxDB plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -28,7 +28,7 @@ Below is the block of configuration to add in your feed2toot.ini::
     user=influxuser
     pass=V3ryS3cr3t
     database=influxdb
-    measurement=tweets
+    measurement=toots
 
 - host: the host where the influxdb instance is. Defaults to 127.0.0.1
 - port: the port where the influxdb instance is listening to. Defaults to 8086
