@@ -137,9 +137,9 @@ It is possible to get all entries from a rss feed available in the uri_list file
 
 In you rsslist.txt, just don't give anything else than the needed feed url to get all the entries::
 
-https://www.journalduhacker.net/rss|title|hacker,psql
-https://carlchenet.com/feed|title|gitlab
-https://blog.linuxjobs.fr/feed.php?rss
+    https://www.journalduhacker.net/rss|title|hacker,psql
+    https://carlchenet.com/feed|title|gitlab
+    https://blog.linuxjobs.fr/feed.php?rss
 
 The last line of the file above only has the url of a rss feed. All entries from this feed will be tweeted.
 

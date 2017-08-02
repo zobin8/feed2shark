@@ -31,10 +31,10 @@ CLASSIFIERS = [
 
 setup(
     name='feed2toot',
-    version='0.5',
+    version='0.6',
     license='GNU GPL v3',
-    description='Parse rss feed and tweet new posts to Mastodon',
-    long_description='Parse rss feed and tweet new posts to the Mastodon social network',
+    description='Parse rss feeds and tweet new posts to Mastodon',
+    long_description='Parse rss feeds and tweet new posts to the Mastodon social network',
     author = 'Carl Chenet',
     author_email = 'chaica@ohmytux.com',
     url = 'https://gitlab.com/chaica/feed2toot',

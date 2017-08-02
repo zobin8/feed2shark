@@ -1,3 +1,14 @@
+## [0.6] - 2017-08-02
+### Added
+- define a name for a feed, accessible with {feedname}. Contributed by Alexis Metaireau.
+- switch the toot visibility by The Dod (@thedod)
+- new accept_bozo_exceptions option to allow malformed rss feeds. Contributed by Alexis Metaireau.
+
+### Changed
+- configuration parser was split into much smaller chunks
+- remove useless imports and coding style. Contributed by Alexis Metaireau.
+- rephrasing and reformatting of the script register_feed2toot_app. Contributed by Bastien Guerry.
+
 ## [0.5] - 2017-05-05
 ### Added
 - manage rss feeds entries without id
