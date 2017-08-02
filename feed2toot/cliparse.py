@@ -20,6 +20,7 @@
 from argparse import ArgumentParser
 import glob
 import logging
+import os
 import os.path
 import sys
 
