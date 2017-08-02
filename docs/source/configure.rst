@@ -36,7 +36,7 @@ In order to configure Feed2toot, you need to create a feed2toot.ini file (or any
     [rss]
     uri=https://www.journalduhacker.net/rss
     uri_list=/etc/feed2toot//rsslist.txt
-    tweet={title} {link}
+    toot={title} {link}
     title_pattern=Open Source
     title_pattern_case_sensitive=true
     no_uri_pattern_no_global_pattern=true
@@ -61,14 +61,14 @@ __ https://github.com/tootsuite/documentation/blob/master/Using-the-API/API.md#p
 
 For the [cache] section:
 
-- cachefile: the path to the cache file storing ids of already tweeted links. Absolute path is mandatory. This file should always use the .db extension.
+- cachefile: the path to the cache file storing ids of already tooted links. Absolute path is mandatory. This file should always use the .db extension.
 - cache_limit: length of the cache queue. defaults to 100.
 
 For the [rss] section:
 
 - uri: the url of the rss feed to parse
 - uri_list: a path to a file with several adresses of rss feeds, one by line. Absolute path is mandatory.
-- tweet: format of the tweet you want to post. It should use existing entries of the RSS fields like {title} or {link}. Launch it with this field empty to display all available entries.
+- toot: format of the toot you want to post. It should use existing entries of the RSS fields like {title} or {link}. Launch it with this field empty to display all available entries.
 - {one field of the rss feed}_pattern: takes a string representing a pattern to match for a specified field of each rss entry of the rss feed, like title_pattern or summary_pattern.
 - {one field of the rss feed}_pattern_case_sensitive: either the pattern matching for the specified field should be case sensitive or not. Default to true if not specified.
 - no_uri_pattern_no_global_pattern: don't apply global pattern (see above) when no pattern-by-uri is defined in the uri_list. Allows to get all entries of a rss in the uri_list because no pattern is defined so we match them all. Defaults to false, meaning the global patterns will be tried on every rss in the uri_list NOT HAVING specific patterns and so ONLY entries from the specific uri in the uri_list matching the global patterns will be considered.
@@ -98,7 +98,7 @@ With the parameter **uri_list**, you can define a list of uri to use. Feed2toot 
 
     [rss]
     uri_list=/home/john/feed2toot/rsslist.txt
-    tweet={title} {link}
+    toot={title} {link}
 
 Now let's have a look at the =/home/john/feed2toot/rsslist.txt file::
 
@@ -114,7 +114,7 @@ If you want to display the name of the feed in the resulting toot, you can do so
 
     Le journal du hacker <https://www.journalduhacker.net/rss/>
 
-Then in the `tweet` configuration, you can use the `{feedname}` syntax, which will be replaced by the actual name of the feed.
+Then in the `toot` configuration, you can use the `{feedname}` syntax, which will be replaced by the actual name of the feed.
 
 Match specific patterns of rss feeds in the uri_list files
 ----------------------------------------------------------
@@ -141,7 +141,7 @@ In you rsslist.txt, just don't give anything else than the needed feed url to ge
     https://carlchenet.com/feed|title|gitlab
     https://blog.linuxjobs.fr/feed.php?rss
 
-The last line of the file above only has the url of a rss feed. All entries from this feed will be tweeted.
+The last line of the file above only has the url of a rss feed. All entries from this feed will be tooted.
 
 How to display available sections of the rss feed
 =================================================
