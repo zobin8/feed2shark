@@ -23,7 +23,7 @@ import os.path
 import sys
 import re
 
-def parseurilist(config, accept_bozo_exception):
+def parseurilist(config, accept_bozo_exceptions):
     '''Parse configuration value of the uri_list option of the rss section'''
     bozoexception = False
     feeds = []
