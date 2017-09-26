@@ -1,3 +1,7 @@
+## [0.7] - 2017-09-26
+### Changed
+- fix issue while using uri_list
+
 ## [0.6] - 2017-08-02
 ### Added
 - define a name for a feed, accessible with {feedname}. Contributed by Alexis Metaireau.
