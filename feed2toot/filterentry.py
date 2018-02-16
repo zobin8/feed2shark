@@ -67,7 +67,7 @@ class FilterEntry:
                 # not case sensitive, so we compare the lower case
                 for pattern in self.options['patterns'][patternlist]:
                     finalpattern = pattern.lower()
-                    finaltitle = self.entry[patternlist.split('_')[0]].lower()
+                    finaltitle = str(self.entry[patternlist.split('_')[0]]).lower()
                     if finalpattern in finaltitle:
                         self.matching[i] = self.entry[i]
             else:
