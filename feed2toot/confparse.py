@@ -31,6 +31,7 @@ import feedparser
 from feed2toot.confparsers.cache import parsecache
 from feed2toot.confparsers.hashtaglist import parsehashtaglist
 from feed2toot.confparsers.feedparser import parsefeedparser
+from feed2toot.confparsers.media import parsemedia
 from feed2toot.confparsers.plugins import parseplugins
 from feed2toot.confparsers.rss.pattern import parsepattern
 from feed2toot.confparsers.rss.toot import parsetoot
@@ -84,6 +85,10 @@ class ConfParse:
             # the hashtag section
             ###########################
             options['hashtaglist'] = parsehashtaglist(self.clioptions.hashtaglist, config)
+            ###########################
+            # the media section
+            ###########################
+            options['media'] = parsemedia(config)
             ###########################
             # the plugins section
             ###########################

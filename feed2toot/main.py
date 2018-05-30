@@ -200,7 +200,7 @@ class Main:
                                 visibility=config.get(
                                     'mastodon', 'toot_visibility',
                                     fallback='public')))
-                            twp = TootPost(config, finaltweet)
+                            twp = TootPost(config, options, finaltweet)
                             storeit = twp.storeit()
                         else:
                             logging.debug('populating RSS entry {}'.format(rss['id']))

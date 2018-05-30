@@ -47,6 +47,9 @@ In order to configure Feed2toot, you need to create a feed2toot.ini file (or any
     [feedparser]
     accept_bozo_exceptions=true
 
+    [media]
+    custom=/var/lib/feed2toot/media/logo.png
+
 For the [mastodon] section:
 
 - instance_url: the url of your Mastodon instance
@@ -80,6 +83,10 @@ For the [hashtaglist] section:
 for the [feedparser] section:
 
 - accept_bozo_exceptions: If set to true, feed2toot will accept malformed feeds, which are rejected by default.
+
+For the [media] section:
+
+- custom: the path to a media (should be supported by Mastodon) to be posted with every Mastodon post.
 
 Example of the list of hash tags
 ================================
