@@ -31,6 +31,7 @@ from feed2toot.filterentry import FilterEntry
 from feed2toot.removeduplicates import RemoveDuplicates
 from feed2toot.tootpost import TootPost
 from feed2toot.feedcache import FeedCache
+from bs4 import BeautifulSoup
 
 class Main:
     '''Main class of Feed2toot'''
@@ -182,6 +183,9 @@ class Main:
                             finaltweet = addtag.finaltweet
                         else:
                             finaltweet = dedup.finaltweet
+
+                        # strip html tags
+                        finaltweet = BeautifulSoup(finaltweet, 'html.parser').get_text()
 
                     if clioptions.dryrun:
                         if entrytosend:
