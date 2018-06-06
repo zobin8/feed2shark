@@ -30,7 +30,7 @@ CLASSIFIERS = [
 
 setup(
     name='feed2toot',
-    version='0.8',
+    version='0.9',
     license='GNU GPL v3',
     description='Parse rss feeds and send new posts to Mastodon',
     long_description='Parse rss feeds and send new posts to the Mastodon social network',
@@ -41,7 +41,7 @@ setup(
     download_url='https://gitlab.com/chaica/feed2toot',
     packages=find_packages(),
     scripts=['scripts/feed2toot', 'scripts/register_feed2toot_app'],
-    install_requires=['feedparser', 'Mastodon.py'],
+    install_requires=['beautifulsoup4', 'feedparser', 'Mastodon.py'],
     extras_require={
         'influxdb':  ["influxdb"]
     }
