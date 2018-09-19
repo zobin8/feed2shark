@@ -22,6 +22,7 @@ import importlib
 import logging
 import logging.handlers
 import sys
+import re
 
 # app libraries imports
 from feed2toot.addtags import AddTags
@@ -128,11 +129,10 @@ class Main:
 
                     severalwordsinhashtag = False
                     # lets see if the rss feed has hashtag
-                    if 'tags' in entry:
+                    if 'tags' in entry and options['addtags']:
                         hastags = True
                     else:
                         hastags = False
-
                     if hastags:
                         rss['hashtags'] = []
                         for i, _ in enumerate(entry['tags']):
@@ -160,16 +160,12 @@ class Main:
                                 # remove space from hashtag
                                 nospace = nospace.replace(" ", "")
                                 rss['hashtags'].append('#{}'.format(nospace))
-
-                    elements = []
-                    for i in tweetformat.split(' '):
-                        tmpelement = ''
-                        # if i is not an empty string
-                        if i:
-                            if i.startswith('{') and i.endswith('}'):
-                                tmpelement = i.strip('{}')
-                                elements.append(tmpelement)
-                    # match elements of the tweet format string with available element in the RSS feed
+                    # parse tweetfomat to elements
+                    elements = re.findall(r"\{(.*?)\}",tweetformat)
+                    # strip : from elements to allow string formating, eg. {title:.20}
+                    for i,s in enumerate(elements):
+                         if s.find(':'):
+                             elements[i] = s.split(':')[0]
                     fe = FilterEntry(elements, entry, options, feed['patterns'], feed['rssobject'], feed['feedname'])
                     entrytosend = fe.finalentry
                     if entrytosend:
