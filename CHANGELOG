@@ -1,3 +1,8 @@
+## [0.10] - 2018-09-22
+### Added
+- new syntax for the toot parameter of [rss] section. Use {summary:.100} to cut the rss field summary after the first 100 characters.
+- add the addtags parameter of the [rss] section
+
 ## [0.9] - 2018-06-07
 ### Added
 - remove html characters from toots. Contributed by Matthew Lorentz and Simounet
