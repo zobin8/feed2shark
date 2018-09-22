@@ -71,10 +71,11 @@ For the [rss] section:
 
 - uri: the url of the rss feed to parse
 - uri_list: a path to a file with several adresses of rss feeds, one by line. Absolute path is mandatory.
-- toot: format of the toot you want to post. It should use existing entries of the RSS fields like {title} or {link}. Launch it with this field empty to display all available entries.
+- toot: format of the toot you want to post. It should use existing entries of the RSS fields like {title} or {link}. Launch it with this field empty to display all available entries. If you want to shorten the size of a field, you can use the syntax {summary:.100} to cut the field "summary" of the rss feed after the first 100 characters (starting from Feed2toot 0.10).
 - {one field of the rss feed}_pattern: takes a string representing a pattern to match for a specified field of each rss entry of the rss feed, like title_pattern or summary_pattern.
 - {one field of the rss feed}_pattern_case_sensitive: either the pattern matching for the specified field should be case sensitive or not. Default to true if not specified.
 - no_uri_pattern_no_global_pattern: don't apply global pattern (see above) when no pattern-by-uri is defined in the uri_list. Allows to get all entries of a rss in the uri_list because no pattern is defined so we match them all. Defaults to false, meaning the global patterns will be tried on every rss in the uri_list NOT HAVING specific patterns and so ONLY entries from the specific uri in the uri_list matching the global patterns will be considered.
+ addtags: add the tags from the rss feed at the end of the toot. Defaults to true.
 
 For the [hashtaglist] section:
 
