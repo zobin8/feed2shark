@@ -128,6 +128,16 @@ class Main:
                         }
 
                     severalwordsinhashtag = False
+                    try:
+                        delimiter=config.get('hashtaglist','tag_delimiter')
+                    except:
+                        delimiter=False
+
+                    try:
+                        tagforce=config.get('hashtaglist', 'tag_force')
+                    except:
+                        tagforce=False
+
                     # lets see if the rss feed has hashtag
                     if 'tags' in entry and options['addtags']:
                         hastags = True
@@ -145,7 +155,7 @@ class Main:
                                         tmphashtags = prehashtags.replace(element,
                                                                           ''.join(element.split()))
                             # replace characters stopping a word from being a hashtag
-                            if severalwordsinhashtag:
+                            if severalwordsinhashtag and not tagforce:
                                 # remove ' from hashtag
                                 tmphashtags = tmphashtags.replace("'", "")
                                 # remove - from hashtag
@@ -154,7 +164,15 @@ class Main:
                                 tmphashtags = tmphashtags.replace(".", "")
                                 # remove space from hashtag
                                 finalhashtags = tmphashtags.replace(" ", "")
+                                # swap delimiter with hash 
+                                finalhashtags = tmphashtags.replace(delimiter, " #")
                                 rss['hashtags'].append('#{}'.format(finalhashtags))
+                            elif tagforce:
+                                tmphashtags = tuple(tagforce.split(delimiter))
+                                for t in tmphashtags:
+                                    #rss['hashtags'].append(t)
+                                    #finalhashtags = tmphashtags.replace(",", " #")
+                                    rss['hashtags'].append('#{}'.format(t))
                             else:
                                 nospace = ''.join(entry['tags'][i]['term'])
                                 # remove space from hashtag
