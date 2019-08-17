@@ -52,8 +52,14 @@ class CliParse:
                             help='tweet all RSS items, regardless of cache')
         parser.add_argument('-l', '--limit', dest='limit', default=10, type=int,
                             help='tweet only LIMIT items (default: %(default)s)')
+        parser.add_argument('-t', '--lock-timeout', dest='locktimeout', default=3600, type=int,
+                            help='lock timeout in seconds after which feed2toot can removes the lock itself')
         parser.add_argument('--cachefile', dest='cachefile',
                             help='location of the cache file (default: %(default)s)')
+        parser.add_argument('--lockfile', dest='lockfile',
+                            default=os.path.join(os.getenv('XDG_CONFIG_HOME', '~/.config'),
+                                                  'feed2toot.lock'),
+                            help='location of the lock file (default: %(default)s)')
         parser.add_argument('-n', '--dry-run', dest='dryrun',
                             action='store_true', default=False,
                             help='Do not actually post tweets')

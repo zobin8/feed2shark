@@ -31,6 +31,7 @@ import feedparser
 from feed2toot.confparsers.cache import parsecache
 from feed2toot.confparsers.hashtaglist import parsehashtaglist
 from feed2toot.confparsers.feedparser import parsefeedparser
+from feed2toot.confparsers.lock import parselock
 from feed2toot.confparsers.media import parsemedia
 from feed2toot.confparsers.plugins import parseplugins
 from feed2toot.confparsers.rss.pattern import parsepattern
@@ -69,6 +70,10 @@ class ConfParse:
             # pattern and patter_case_sensitive format option
             #################################################
             options['patterns'], options['patternscasesensitive'] = parsepattern(config)
+            #################################################
+            # lock file options
+            #################################################
+            options['lockfile'], options['locktimeout'] = parselock(self.clioptions.lockfile, self.clioptions.locktimeout, config)
             ###############################
             # addtags option, default: True
             ###############################

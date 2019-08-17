@@ -32,6 +32,7 @@ from feed2toot.filterentry import FilterEntry
 from feed2toot.removeduplicates import RemoveDuplicates
 from feed2toot.tootpost import TootPost
 from feed2toot.feedcache import FeedCache
+from feed2toot.lock import LockFile
 from bs4 import BeautifulSoup
 
 class Main:
@@ -71,6 +72,8 @@ class Main:
             tweetformat = conf[2]
             feeds = conf[3]
             plugins = conf[4]
+            # check the logfile and logtimeout
+            lockfile = LockFile(options['lockfile'], options['locktimeout'])
             # create link to the persistent list
             cache = FeedCache(options)
             if 'hashtaglist' in options and options['hashtaglist']:
@@ -221,3 +224,5 @@ class Main:
                                     print(err)
             # do not forget to close cache (shelf object)
             cache.close()
+            # release the lock file
+            lockfile.release()
