@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'feed2toot'
-copyright = '2017, Carl Chenet <chaica@ohmytux.com>'
+copyright = '2015-2019, Carl Chenet <chaica@ohmytux.com>'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
