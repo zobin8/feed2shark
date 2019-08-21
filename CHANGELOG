@@ -1,7 +1,13 @@
+## [0.11] - 2019-08-24
+### Added
+- command line options --lock-file to define a lock file
+- command line options --lock-timeout  to remove this lock file automatically
+- lock section in configuration with lock_file andd lock_time parameters
+
 ## [0.10] - 2018-09-22
 ### Added
-- new syntax for the toot parameter of [rss] section. Use {summary:.100} to cut the rss field summary after the first 100 characters. Contributed by Matthias Henze.
-- add the addtags parameter of the [rss] section. Contributed by Matthias Henze.
+- new syntax for the toot parameter of [rss] section. Use {summary:.100} to cut the rss field summary after the first 100 characters. Contributed by Matthias Henze
+- add the addtags parameter of the [rss] section. Contributed by Matthias Henze
 
 ## [0.9] - 2018-06-07
 ### Added
@@ -17,14 +23,14 @@
 
 ## [0.6] - 2017-08-02
 ### Added
-- define a name for a feed, accessible with {feedname}. Contributed by Alexis Metaireau.
-- switch the toot visibility. Contributed by The Dod.
-- new accept_bozo_exceptions option to allow malformed rss feeds. Contributed by Alexis Metaireau.
+- define a name for a feed, accessible with {feedname}, contributed by Alexis Metaireau
+- switch the toot visibility. Contributed by The Dod
+- new accept_bozo_exceptions option to allow malformed rss feeds, contributed by Alexis Metaireau
 
 ### Changed
 - configuration parser was split into much smaller chunks
-- remove useless imports and coding style. Contributed by Alexis Metaireau.
-- rephrasing and reformatting of the script register_feed2toot_app. Contributed by Bastien Guerry.
+- remove useless imports and coding style, contributed by Alexis Metaireau
+- rephrasing and reformatting of the script register_feed2toot_app, contributed by Bastien Guerry
 
 ## [0.5] - 2017-05-05
 ### Added

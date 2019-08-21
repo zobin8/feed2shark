@@ -33,6 +33,10 @@ In order to configure Feed2toot, you need to create a feed2toot.ini file (or any
     cachefile=/var/lib/feed2toot/feed2toot.db
     cache_limit=10000
 
+    [lock]
+    lock_file=/var/lock/feed2toot.lock
+    lock_timeout=3600
+
     [rss]
     uri=https://www.journalduhacker.net/rss
     uri_list=/etc/feed2toot//rsslist.txt
@@ -66,6 +70,11 @@ For the [cache] section:
 
 - cachefile: the path to the cache file storing ids of already tooted links. Absolute path is mandatory. This file should always use the .db extension.
 - cache_limit: length of the cache queue. defaults to 100.
+
+For the [lock] section (starting from version 0.11):
+
+- lock_file: lock to stop any other feed2toot instance to run at the same time. Default is ~/.config/feed2toot.lock
+- lock_timeout: automatically remove the lock if the datetime in the lock file is greater than n seconds. Default is 3600 seconds.
 
 For the [rss] section:
 
