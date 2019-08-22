@@ -34,7 +34,7 @@ def parselock(lockfile, locktimeout, config):
     lockfile = os.path.expanduser(lockfile)
     lockfileparent = os.path.dirname(lockfile)
     if lockfileparent and not os.path.exists(lockfileparent):
-        sys.exit('The parent directory of the cache file does not exist: {lockfileparent}'.format(lockfileparent=lockfileparent))
+        sys.exit('The parent directory of the lock file does not exist: {lockfileparent}'.format(lockfileparent=lockfileparent))
     ######################
     # lock_timeout option
     ######################
