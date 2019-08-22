@@ -1,8 +1,8 @@
 ## [0.11] - 2019-08-24
 ### Added
-- command line options --lock-file to define a lock file
-- command line options --lock-timeout  to remove this lock file automatically
-- lock section in configuration with lock_file andd lock_time parameters
+- MAJOR CHANGE: command line options --lockfile to define a lock file
+- MAJOR CHANGE: command line options --lock-timeout  to remove this lock file automatically
+- MAJOR CHANGE: lock section in configuration with lock_file andd lock_time parameters
 
 ## [0.10] - 2018-09-22
 ### Added
