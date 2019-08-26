@@ -13,3 +13,19 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+# standard libraires imports
+import importlib
+
+def activate_plugins(entrytosend):
+    '''activate plugins'''
+    for plugin in plugins:
+        capitalizedplugin = plugin.title()
+        pluginclassname = '{plugin}Plugin'.format(plugin=capitalizedplugin)
+        pluginmodulename = 'feed2toot.plugins.{pluginmodule}'.format(pluginmodule=pluginclassname.lower())
+        try:
+            pluginmodule = importlib.import_module(pluginmodulename)
+            pluginclass = getattr(pluginmodule, pluginclassname)
+            pluginclass(plugins[plugin], finaltweet)
+        except ImportError as err:
+            print(err)
