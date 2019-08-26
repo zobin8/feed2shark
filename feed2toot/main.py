@@ -39,6 +39,7 @@ from feed2toot.lock import LockFile
 from feed2toot.message import build_message
 from feed2toot.message import send_message_dry_run
 from feed2toot.message import send_message
+from feed2toot.plugins import activate_plugins
 from feed2toot.removeduplicates import RemoveDuplicates
 from feed2toot.rss import populate_rss
 from feed2toot.sortentries import sort_entries
@@ -116,13 +117,13 @@ class Main:
                     entrytosend = fe.finalentry
                     if entrytosend:
                         finaltweet = build_message(entrytosend, tweetformat, rss)
-                    if clioptions.dryrun:
-                        send_message_dry_run(config, entrytosend, finaltweet)
-                    else:
-                        send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss)
-                        # plugins
-                        if plugins and entrytosend:
-                            activate_plugins(plugins)
+                        if clioptions.dryrun:
+                            send_message_dry_run(config, entrytosend, finaltweet)
+                        else:
+                            send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss)
+                            # plugins
+                            if plugins and entrytosend:
+                                activate_plugins(plugins, finaltweet)
             # do not forget to close cache (shelf object)
             cache.close()
             # release the lock file

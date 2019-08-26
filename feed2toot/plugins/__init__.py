@@ -17,7 +17,7 @@
 # standard libraires imports
 import importlib
 
-def activate_plugins(entrytosend):
+def activate_plugins(plugins, finaltweet):
     '''activate plugins'''
     for plugin in plugins:
         capitalizedplugin = plugin.title()
