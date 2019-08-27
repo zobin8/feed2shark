@@ -49,4 +49,7 @@ def parsepattern(config):
                 except ValueError as err:
                     logging.warn(err)
                     patternscasesensitive[currentoption] = True
+            else:
+                # default value
+                patternscasesensitive[currentoption] = False
     return patterns, patternscasesensitive
