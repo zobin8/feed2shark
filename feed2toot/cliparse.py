@@ -34,7 +34,7 @@ class CliParse:
 
     def main(self):
         '''main of CliParse class'''
-        feed2tootepilog = 'For more information: https://feed2toot.readhthedocs.org'
+        feed2tootepilog = 'For more information: https://feed2toot.readthedocs.io'
         feed2tootdescription = 'Take rss feed and send it to Mastodon'
         parser = ArgumentParser(prog='feed2toot',
                                 description=feed2tootdescription,

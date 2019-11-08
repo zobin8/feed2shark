@@ -1,7 +1,7 @@
 ### Feed2toot
 
 Feed2toot automatically parses rss feeds, identifies new posts and posts them on the [Mastodon](https://mastodon.social) social network.
-For the full documentation, [read it online](https://feed2toot.readthedocs.org/en/latest/).
+For the full documentation, [read it online](https://feed2toot.readthedocs.io/en/latest/).
 
 If you would like, you can [support the development of this project on Liberapay](https://liberapay.com/carlchenet/).
 Alternatively you can donate cryptocurrencies:
@@ -17,7 +17,7 @@ Alternatively you can donate cryptocurrencies:
 
 * Install Feed2toot from sources
   *(see the installation guide for full details)
-  [Installation Guide](http://feed2toot.readthedocs.org/en/latest/install.html)*
+  [Installation Guide](http://feed2toot.readthedocs.io/en/latest/install.html)*
 
 
         # tar zxvf feed2toot-0.12.tar.gz
