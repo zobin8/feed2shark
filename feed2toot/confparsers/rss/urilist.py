@@ -20,10 +20,11 @@
 import feedparser
 import logging
 import os.path
+import ssl
 import sys
 import re
 
-def parseurilist(config, accept_bozo_exceptions):
+def parseurilist(config, accept_bozo_exceptions, ignoressl):
     '''Parse configuration value of the uri_list option of the rss section'''
     bozoexception = False
     feeds = []
@@ -62,6 +63,10 @@ def parseurilist(config, accept_bozo_exceptions):
                     patternstring = ''
                 # split different searched patterns
                 patterns = [i for i in patternstring.split(stringsep) if i]
+                # ignore ssl if asked
+                if ignoressl:
+                    if hasattr(ssl, '_create_unverified_context'):
+                        ssl._create_default_https_context = ssl._create_unverified_context
                 # retrieve the content of the rss
                 feed = feedparser.parse(rss)
                 if 'bozo_exception' in feed:

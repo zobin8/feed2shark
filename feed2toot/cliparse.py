@@ -50,6 +50,9 @@ class CliParse:
         parser.add_argument('-a', '--all', action='store_true', default=False,
                             dest='all',
                             help='tweet all RSS items, regardless of cache')
+        parser.add_argument('--ignore-ssl', action='store_true', default=False,
+                            dest='ignore_ssl',
+                            help='ignore ssl errors while fetching rss feeds')
         parser.add_argument('-l', '--limit', dest='limit', default=10, type=int,
                             help='tweet only LIMIT items (default: %(default)s)')
         parser.add_argument('-t', '--lock-timeout', dest='locktimeout', default=3600, type=int,

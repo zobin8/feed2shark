@@ -44,6 +44,7 @@ In order to configure Feed2toot, you need to create a feed2toot.ini file (or any
     title_pattern=Open Source
     title_pattern_case_sensitive=true
     no_uri_pattern_no_global_pattern=true
+    ; ignore_ssl=false
 
     [hashtaglist]
     several_words_hashtags_list=/etc/feed2toot/hashtags.txt
@@ -85,6 +86,7 @@ For the [rss] section:
 - {one field of the rss feed}_pattern_case_sensitive: either the pattern matching for the specified field should be case sensitive or not. Default to true if not specified.
 - no_uri_pattern_no_global_pattern: don't apply global pattern (see above) when no pattern-by-uri is defined in the uri_list. Allows to get all entries of a rss in the uri_list because no pattern is defined so we match them all. Defaults to false, meaning the global patterns will be tried on every rss in the uri_list NOT HAVING specific patterns and so ONLY entries from the specific uri in the uri_list matching the global patterns will be considered.
  addtags: add the tags from the rss feed at the end of the toot. Defaults to true.
+- ignore_ssl: when the uri or uri_list contains an https url with an invalid certificate (e.g an expired one), feed2toot will be unable to get rss content. This option allows to bypass the ssl security to catch the rss content. Defaults to false.
 
 For the [hashtaglist] section:
 

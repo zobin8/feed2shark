@@ -34,6 +34,7 @@ from feed2toot.confparsers.feedparser import parsefeedparser
 from feed2toot.confparsers.lock import parselock
 from feed2toot.confparsers.media import parsemedia
 from feed2toot.confparsers.plugins import parseplugins
+from feed2toot.confparsers.rss.ignoressl import parseignoressl
 from feed2toot.confparsers.rss.pattern import parsepattern
 from feed2toot.confparsers.rss.toot import parsetoot
 from feed2toot.confparsers.rss.uri import parseuri
@@ -78,15 +79,19 @@ class ConfParse:
             # addtags option, default: True
             ###############################
             options['addtags'] = parseaddtags(config)
+            ###################
+            # ignore_ssl option
+            ###################
+            ignore_ssl = parseignoressl(config, self.clioptions.ignore_ssl)
             #################
             # uri_list option
             #################
             feeds = []
-            feeds = parseurilist(config, accept_bozo_exceptions)
+            feeds = parseurilist(config, accept_bozo_exceptions, ignore_ssl)
             ############
             # uri option
             ############
-            options['rss_uri'], feed, feedname, options['nopatternurinoglobalpattern']  = parseuri(config, self.clioptions.rss_uri, feeds)
+            options['rss_uri'], feed, feedname, options['nopatternurinoglobalpattern']  = parseuri(config, self.clioptions.rss_uri, feeds, ignore_ssl)
             ###########################
             # the cache section
             ###########################
