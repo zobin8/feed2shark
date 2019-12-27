@@ -20,7 +20,7 @@ Alternatively you can donate cryptocurrencies:
   [Installation Guide](http://feed2toot.readthedocs.io/en/latest/install.html)*
 
 
-        # tar zxvf feed2toot-0.12.tar.gz
+        # tar zxvf feed2toot-0.13.tar.gz
         # cd feed2toot
         # python3 setup.py install
         # # or
