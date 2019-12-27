@@ -98,9 +98,11 @@ class Main:
                 if clioptions.rsssections:
                     if entries:
                         print('The following sections are available in this RSS feed: {}'.format([j for j in entries[0]]))
-                        sys.exit(0)
                     else:
-                        sys.exit('Could not parse the section of the rss feed')
+                        print('Could not parse the section of the rss feed')
+                        # release the lock file
+                    lockfile.release()
+                    sys.exit(0)
                 # sort entries and check if they were not previously sent
                 totweet = sort_entries(clioptions.all, cache, entries)
                 for entry in totweet:
