@@ -40,10 +40,8 @@ from feed2toot.message import build_message
 from feed2toot.message import send_message_dry_run
 from feed2toot.message import send_message
 from feed2toot.plugins import activate_plugins
-from feed2toot.removeduplicates import RemoveDuplicates
 from feed2toot.rss import populate_rss
 from feed2toot.sortentries import sort_entries
-from feed2toot.tootpost import TootPost
 
 class Main:
     '''Main class of Feed2toot'''
