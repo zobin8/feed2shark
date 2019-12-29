@@ -54,3 +54,11 @@ Using syslog
 Feed2toot is able to send its log to syslog. You can use it with the following command::
 
     $ feed2toot --syslog=WARN -c /path/to/feed2toot.ini
+
+Limit number of rss entries published at each execution
+=======================================================
+If you want to limit the number of rss entries published at each execution, you can use the --limit CLI option.
+
+    $ feed2toot --limit 5 -c /path/to/feed2toot.ini
+
+The number of posts to Mastodon will be at 5 posts top with this CLI option.
