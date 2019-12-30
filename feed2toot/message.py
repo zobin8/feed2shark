@@ -26,23 +26,27 @@ from feed2toot.addtags import AddTags
 from feed2toot.removeduplicates import RemoveDuplicates
 from feed2toot.tootpost import TootPost
 
-def build_message(entrytosend, tweetformat, rss, tootmaxlen):
+def build_message(entrytosend, tweetformat, rss, tootmaxlen, notagsintoot):
     '''populate the rss dict with the new entry'''
     tweetwithnotag = tweetformat.format(**entrytosend)
     # replace line breaks
     tootwithlinebreaks = tweetwithnotag.replace('\\n', '\n')
     # remove duplicates from the final tweet
     dedup = RemoveDuplicates(tootwithlinebreaks)
-    # only append hashtags if they exist
-    # remove last tags if tweet too long
-    if 'hashtags' in rss:
-        addtag = AddTags(dedup.finaltweet, rss['hashtags'])
-        finaltweet = addtag.finaltweet
+    # only add tags if user wants to
+    if not notagsintoot:
+        # only append hashtags if they exist
+        # remove last tags if tweet too long
+        if 'hashtags' in rss:
+            addtag = AddTags(dedup.finaltweet, rss['hashtags'])
+            finaltweet = addtag.finaltweet
+        else:
+            finaltweet = dedup.finaltweet
     else:
         finaltweet = dedup.finaltweet
     # strip html tags
     finaltweet = BeautifulSoup(finaltweet, 'html.parser').get_text()
-    # truncate toot to user-defined value
+    # truncate toot to user-defined value whatever the content is
     if len(finaltweet) > tootmaxlen:
         return ''.join([finaltweet[0:-3], '...'])
     else:

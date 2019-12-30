@@ -30,6 +30,7 @@ import feedparser
 # feed2toot library imports
 from feed2toot.confparsers.cache import parsecache
 from feed2toot.confparsers.hashtaglist import parsehashtaglist
+from feed2toot.confparsers.hashtags.nohashtags import parsenotagsintoot
 from feed2toot.confparsers.feedparser import parsefeedparser
 from feed2toot.confparsers.lock import parselock
 from feed2toot.confparsers.media import parsemedia
@@ -99,9 +100,10 @@ class ConfParse:
             ###########################
             options['cachefile'], options['cache_limit'] = parsecache(self.clioptions.cachefile, config)
             ###########################
-            # the hashtag section
+            # the hashtaglist section
             ###########################
             options['hashtaglist'] = parsehashtaglist(self.clioptions.hashtaglist, config)
+            options['notagsintoot'] = parsenotagsintoot(config)
             ###########################
             # the media section
             ###########################
