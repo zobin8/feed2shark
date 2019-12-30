@@ -29,8 +29,10 @@ from feed2toot.tootpost import TootPost
 def build_message(entrytosend, tweetformat, rss):
     '''populate the rss dict with the new entry'''
     tweetwithnotag = tweetformat.format(**entrytosend)
+    # replace line breaks
+    tootwithlinebreaks = tweetwithnotag.replace('\\n', '\n')
     # remove duplicates from the final tweet
-    dedup = RemoveDuplicates(tweetwithnotag)
+    dedup = RemoveDuplicates(tootwithlinebreaks)
     # only append hashtags if they exist
     # remove last tags if tweet too long
     if 'hashtags' in rss:
