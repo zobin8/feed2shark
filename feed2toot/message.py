@@ -26,7 +26,7 @@ from feed2toot.addtags import AddTags
 from feed2toot.removeduplicates import RemoveDuplicates
 from feed2toot.tootpost import TootPost
 
-def build_message(entrytosend, tweetformat, rss):
+def build_message(entrytosend, tweetformat, rss, tootmaxlen):
     '''populate the rss dict with the new entry'''
     tweetwithnotag = tweetformat.format(**entrytosend)
     # replace line breaks
@@ -40,10 +40,13 @@ def build_message(entrytosend, tweetformat, rss):
         finaltweet = addtag.finaltweet
     else:
         finaltweet = dedup.finaltweet
-
     # strip html tags
     finaltweet = BeautifulSoup(finaltweet, 'html.parser').get_text()
-    return finaltweet
+    # truncate toot to user-defined value
+    if len(finaltweet) > tootmaxlen:
+        return ''.join([finaltweet[0:-3], '...'])
+    else:
+        return finaltweet
 
 def send_message_dry_run(config, entrytosend, finaltweet):
     '''simulate sending message using dry run mode'''

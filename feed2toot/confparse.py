@@ -40,6 +40,7 @@ from feed2toot.confparsers.rss.toot import parsetoot
 from feed2toot.confparsers.rss.uri import parseuri
 from feed2toot.confparsers.rss.urilist import parseurilist
 from feed2toot.confparsers.rss.addtags import parseaddtags
+from feed2toot.confparsers.rss.tootmaxlen import parsetootmaxlen
 
 class ConfParse:
     '''ConfParse class'''
@@ -67,6 +68,7 @@ class ConfParse:
             # the rss section
             ###########################
             self.tweetformat = parsetoot(config)
+            options['tootmaxlen'] = parsetootmaxlen(config)
             #################################################
             # pattern and patter_case_sensitive format option
             #################################################
