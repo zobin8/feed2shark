@@ -24,7 +24,7 @@ import os
 import os.path
 import sys
 
-__version__ = '0.13'
+__version__ = '0.14'
 
 class CliParse:
     '''CliParse class'''

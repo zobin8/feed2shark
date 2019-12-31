@@ -1,3 +1,9 @@
+## [0.14] - 2019-12-31
+### Added
+- support for line breaks in toots
+- new configuration parameter toot_max_len to define the maximum length of a toot
+- new configuration parameter no_tags_in_toot to stop hash tags to be added in toots
+
 ## [0.13] - 2019-12-27
 ### Added
 - new cli option --ignore-ssl and parameter ignore_ssl to ignore ssl error in the rss feeds

@@ -31,7 +31,7 @@ CLASSIFIERS = [
 
 setup(
     name='feed2toot',
-    version='0.13',
+    version='0.14',
     license='GNU GPL v3',
     description='Parse rss feeds and send new posts to Mastodon',
     long_description='Parse rss feeds and send new posts to the Mastodon social network',
