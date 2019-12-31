@@ -48,6 +48,7 @@ def build_message(entrytosend, tweetformat, rss, tootmaxlen, notagsintoot):
     finaltweet = BeautifulSoup(finaltweet, 'html.parser').get_text()
     # truncate toot to user-defined value whatever the content is
     if len(finaltweet) > tootmaxlen:
+        finaltweet = finaltweet[0:tootmaxlen-1]
         return ''.join([finaltweet[0:-3], '...'])
     else:
         return finaltweet
