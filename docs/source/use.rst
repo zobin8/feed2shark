@@ -6,7 +6,7 @@ After the configuration of Feed2toot, just launch the following command::
 
 Run Feed2toot on a regular basis
 =================================
-Feed2toot should be launche on a regular basis in order to efficiently send your new RSS entries to Mastodon. It is quite easy to achieve with adding a line to your user crontab, as described below::
+Feed2toot should be launched on a regular basis in order to efficiently send your new RSS entries to Mastodon. It is quite easy to achieve by adding a line to your user crontab, as described below::
 
     @hourly feed2toot -c /path/to/feed2toot.ini
 
