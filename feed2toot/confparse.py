@@ -94,7 +94,11 @@ class ConfParse:
             ############
             # uri option
             ############
-            options['rss_uri'], feed, feedname, options['nopatternurinoglobalpattern']  = parseuri(config, self.clioptions.rss_uri, feeds, ignore_ssl)
+            if config.has_option('rss', 'uri') or self.clioptions.rss_uri:
+                options['rss_uri'], feed, feedname, options['nopatternurinoglobalpattern'] = parseuri(config, self.clioptions.rss_uri, feeds, ignore_ssl)
+            else:
+                if config.has_option('rss', 'no_uri_pattern_no_global_pattern'):
+                    options['nopatternurinoglobalpattern'] = config.getboolean('rss', 'no_uri_pattern_no_global_pattern')
             ###########################
             # the cache section
             ###########################
