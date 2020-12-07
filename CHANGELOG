@@ -1,3 +1,10 @@
+## [0.15] - 2020-12-07
+### Changed
+- maintenance version
+- fix bug while using uri_list parameter alone following feedparser upgrade
+- update copyrigth
+- update author email
+
 ## [0.14] - 2019-12-31
 ### Added
 - support for line breaks in toots
