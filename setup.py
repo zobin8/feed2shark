@@ -1,4 +1,4 @@
-# Copyright 2015-2019 Carl Chenet <carl.chenet@ohmytux.com>
+# Copyright 2015-2020 Carl Chenet <carl.chenet@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -36,7 +36,7 @@ setup(
     description='Parse rss feeds and send new posts to Mastodon',
     long_description='Parse rss feeds and send new posts to the Mastodon social network',
     author = 'Carl Chenet',
-    author_email = 'chaica@ohmytux.com',
+    author_email = 'carl.chenet@ohmytux.com',
     url = 'https://gitlab.com/chaica/feed2toot',
     classifiers=CLASSIFIERS,
     download_url='https://gitlab.com/chaica/feed2toot',

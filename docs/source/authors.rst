@@ -1,4 +1,4 @@
 Authors
 =======
 
-Carl Chenet <chaica@ohmytux.com>
+Carl Chenet <carl.chenet@ohmytux.com>

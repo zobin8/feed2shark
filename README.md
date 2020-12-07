@@ -59,7 +59,7 @@ Alternatively you can donate cryptocurrencies:
 
 ### Authors
 
-* Carl Chenet <chaica@ohmytux.com>
+* Carl Chenet <carl.chenet@ohmytux.com>
 * Antoine Beaupré <anarcat@debian.org>
 * First developed by Todd Eddy
 
