@@ -1,23 +1,34 @@
 Configure Feed2toot
 ===================
 
+Create credentials for Mastodon
+-------------------------------
 As a prerequisite to use Feed2toot, you need to authorize a Mastodon app for your account.
 
 Just use the script register_feed2toot_app to register the feed2toot app for your account.::
 
     $ ./register_feed2toot_app
-
-    This app generates Mastodon app credentials needed by Feed2toot.
-    feed2toot_clientcred.txt and feed2toot_usercred.txt will be written in the current dir /home/chaica/progra/python/feed2toot.
-    One connection is initiated to create the app.
+    
+    This script generates the Mastodon application credentials for Feed2toot.
+    feed2toot_clientcred.txt and feed2toot_usercred.txt will be written
+    in the current directory: /home/me/feed2toot.
+    WARNING: previous files with the same names will be overwritten.
+    
+    A connection is also initiated to create the application.
     Your password is *not* stored.
+    
+    Mastodon instance URL (defaults to https://mastodon.social): https://framapiaf.org
+    Mastodon login: toto@titi.com
+    Mastodon password: 
+    
+    The app feed2toot was added to your Preferences=>Accounts=>Authorized apps page.
+    The file feed2toot_clientcred.txt and feed2toot_usercred.txt were created in the current directory.
 
-    Mastodon instance url (defaults to https://mastodon.social):
-    Mastodon login:chaica@ohmytux.com
-    Mastodon password:
-    The feed2toot app was added to your preferences=>authorized apps page
+As described above, two files were created. See the :ref:`Use register_feed2toot_app` section for more options for register_feed2toot_app.
 
-As described above, two files were created. You'll need them in the feed2toot configuration.
+Create Feed2toot configuration
+------------------------------
+After using register_feed2toot_app, you'll need the credentials in the feed2toot configuration.
 
 In order to configure Feed2toot, you need to create a feed2toot.ini file (or any name you prefer, finishing with the extension .ini) with the following parameters::
 
@@ -88,7 +99,7 @@ For the [rss] section:
 - {one field of the rss feed}_pattern: takes a string representing a pattern to match for a specified field of each rss entry of the rss feed, like title_pattern or summary_pattern.
 - {one field of the rss feed}_pattern_case_sensitive: either the pattern matching for the specified field should be case sensitive or not. Default to true if not specified.
 - no_uri_pattern_no_global_pattern: don't apply global pattern (see above) when no pattern-by-uri is defined in the uri_list. Allows to get all entries of a rss in the uri_list because no pattern is defined so we match them all. Defaults to false, meaning the global patterns will be tried on every rss in the uri_list NOT HAVING specific patterns and so ONLY entries from the specific uri in the uri_list matching the global patterns will be considered.
- addtags: add the tags from the rss feed at the end of the toot. Defaults to true.
+- addtags: add the tags from the rss feed at the end of the toot. Defaults to true.
 - ignore_ssl: when the uri or uri_list contains an https url with an invalid certificate (e.g an expired one), feed2toot will be unable to get rss content. This option allows to bypass the ssl security to catch the rss content. Defaults to false.
 
 For the [hashtaglist] section:
@@ -143,8 +154,8 @@ Match specific patterns of rss feeds in the uri_list files
 ----------------------------------------------------------
 You can use specific pattern matching for uri in the uri_list file to filter some of the rss entries of a rss feed. Lets modify the previous file::
 
-https://www.journalduhacker.net/rss|title|hacker,psql
-https://carlchenet.com/feed|title|gitlab
+    https://www.journalduhacker.net/rss|title|hacker,psql
+    https://carlchenet.com/feed|title|gitlab
 
 Each line of this file starts with an uri, followed by a pipe (|), followed by the name of the available section to parse (see below), again followed by a pipe (|), followed by patterns, each pattern being separated from the other one by a semi-colon (,).
 
@@ -166,9 +177,3 @@ In you rsslist.txt, just don't give anything else than the needed feed url to ge
 
 The last line of the file above only has the url of a rss feed. All entries from this feed will be tooted.
 
-How to display available sections of the rss feed
-=================================================
-Feed2toot offers the **--rss-sections** command line option to display the available section of the rss feed and exits::
-
-    $ feed2toot --rss-sections -c feed2toot.ini
-    The following sections are available in this RSS feed: ['title', 'comments', 'authors', 'link', 'author', 'summary', 'links', 'tags', id', 'author_detail', 'published'].
