@@ -1,9 +1,16 @@
+## [0.16] - 2020-12-09
+### Added
+- scripts/register_feed2toot_app: --client-credentials-file option to change the filename in which the client credentials are stored
+- scripts/register_feed2toot_app: --user-credentials-file option to change the filename in which the client credentials are stored
+- scripts/register_feed2toot_app: --name to change the Mastodon app name
+
 ## [0.15] - 2020-12-07
 ### Changed
 - maintenance version
 - fix bug while using uri_list parameter alone following feedparser upgrade
 - update copyrigth
 - update author email
+
 
 ## [0.14] - 2019-12-31
 ### Added
