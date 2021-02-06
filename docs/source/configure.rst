@@ -68,6 +68,11 @@ In order to configure Feed2toot, you need to create a feed2toot.ini file (or any
     [media]
     custom=/var/lib/feed2toot/media/logo.png
 
+    ; Optional, if you wish to post to a Pleroma instance
+    [pleroma]
+    ; Specify content_type to set the content type of your post on Pleroma. 
+    content_type=text/plain
+
 For the [mastodon] section:
 
 - instance_url: the url of your Mastodon instance
@@ -114,6 +119,10 @@ for the [feedparser] section:
 For the [media] section:
 
 - custom: the path to a media (should be supported by Mastodon) to be posted with every Mastodon post.
+
+For the [pleroma] section:
+
+- content_type: Specify content_type to set the content type of your post on Pleroma. It accepts ‘text/plain’ (default), ‘text/markdown’, ‘text/html’ and ‘text/bbcode'. This parameter is not supported on Mastodon servers, but will be safely ignored if set. Use proper syntax in toot parameter of [rss] section.
 
 Example of the list of hash tags
 ================================
