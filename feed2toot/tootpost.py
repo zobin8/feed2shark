@@ -31,24 +31,18 @@ class TootPost:
 
     def main(self):
         '''Main of the TweetPost class'''
-        mastodon_feature_set = 'mainline'
-        toot_content_type = None
-        if 'pleroma' in self.config.sections():
-            mastodon_feature_set='pleroma'
-            if self.config.has_option('pleroma', 'content_type'):
-                toot_content_type=self.config.get('pleroma', 'content_type', fallback='text/plain')
         mastodon = Mastodon(
             client_id=self.config.get('mastodon', 'client_credentials'),
             access_token=self.config.get('mastodon', 'user_credentials'),
             api_base_url=self.config.get('mastodon', 'instance_url'),
-            feature_set=mastodon_feature_set
+            feature_set=self.options['mastodon_feature_set']
         )
         toot_visibility = self.config.get('mastodon', 'toot_visibility', fallback='public')
         if 'custom' in self.options['media']:
             mediaid = mastodon.media_post(self.config['media']['custom'])
-            mastodon.status_post(self.toot, media_ids=[mediaid], visibility=toot_visibility, content_type=toot_content_type)
+            mastodon.status_post(self.toot, media_ids=[mediaid], visibility=toot_visibility, content_type=self.options['toot_content_type'])
         else:
-            mastodon.status_post(self.toot, visibility=toot_visibility, content_type=toot_content_type)
+            mastodon.status_post(self.toot, visibility=toot_visibility, content_type=self.options['toot_content_type'])
 
     def storeit(self):
         '''Indicate if the tweet should be stored or not'''

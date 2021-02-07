@@ -34,6 +34,7 @@ from feed2toot.confparsers.hashtags.nohashtags import parsenotagsintoot
 from feed2toot.confparsers.feedparser import parsefeedparser
 from feed2toot.confparsers.lock import parselock
 from feed2toot.confparsers.media import parsemedia
+from feed2toot.confparsers.pleroma import parsepleroma
 from feed2toot.confparsers.plugins import parseplugins
 from feed2toot.confparsers.rss.ignoressl import parseignoressl
 from feed2toot.confparsers.rss.pattern import parsepattern
@@ -112,6 +113,10 @@ class ConfParse:
             # the media section
             ###########################
             options['media'] = parsemedia(config)
+            ###########################
+            # the pleroma section
+            ###########################
+            options['mastodon_feature_set'], options['toot_content_type'] = parsepleroma(config)
             ###########################
             # the plugins section
             ###########################
