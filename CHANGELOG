@@ -1,3 +1,8 @@
+## [0.17] - 2021-03-26
+### Changed
+- fix install bug while installing from sources
+- bump changelog
+
 ## [0.16] - 2020-12-09
 ### Added
 - scripts/register_feed2toot_app: --client-credentials-file option to change the filename in which the client credentials are stored

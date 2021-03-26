@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015-2020 Carl Chenet <carl.chenet@ohmytux.com>
+# Copyright © 2015-2021 Carl Chenet <carl.chenet@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -24,7 +24,7 @@ import os
 import os.path
 import sys
 
-__version__ = '0.16'
+__version__ = '0.17'
 
 class CliParse:
     '''CliParse class'''

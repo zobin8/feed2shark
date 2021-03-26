@@ -1,4 +1,4 @@
-# Copyright 2015-2020 Carl Chenet <carl.chenet@ohmytux.com>
+# Copyright 2015-2021 Carl Chenet <carl.chenet@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -31,7 +31,7 @@ CLASSIFIERS = [
 
 setup(
     name='feed2toot',
-    version='0.16',
+    version='0.17',
     license='GNU GPL v3',
     description='Parse rss feeds and send new posts to Mastodon',
     long_description='Parse rss feeds and send new posts to the Mastodon social network',
