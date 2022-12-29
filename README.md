@@ -3,11 +3,10 @@
 Feed2toot automatically parses rss feeds, identifies new posts and posts them on the [Mastodon](https://mastodon.social) social network.
 For the full documentation, [read it online](https://feed2toot.readthedocs.io/en/latest/).
 
-If you would like, you can [support the development of this project on Liberapay](https://liberapay.com/carlchenet/).
-Alternatively you can donate cryptocurrencies:
+If you like Feed2toot, you can donate cryptocurrencies to support the development:
 
 - BTC: 1AW12Zw93rx4NzWn5evcG7RNNEM2RSLmAC
-- XMR: 43GGv8KzVhxehv832FWPTF7FSVuWjuBarFd17QP163uxMaFyoqwmDf1aiRtS5jWgCiRsi73yqedNJJ6V1La2joznKHGAhDi
+- XMR: 82VFaMG55AnW1MDgsmKgwUShT2MaiSi7AUY9DQANf7BWK3HdQBKwz58EcxshAWZGkV2A3KPGN6vqRjjvQWsr4jf6Dhc2kEC
 
 ### Quick Install
 
