@@ -34,14 +34,15 @@ class TootPost:
         mastodon = Mastodon(
             client_id=self.config.get('mastodon', 'client_credentials'),
             access_token=self.config.get('mastodon', 'user_credentials'),
-            api_base_url=self.config.get('mastodon', 'instance_url')
+            api_base_url=self.config.get('mastodon', 'instance_url'),
+            feature_set=self.options['mastodon_feature_set']
         )
         toot_visibility = self.config.get('mastodon', 'toot_visibility', fallback='public')
         if 'custom' in self.options['media']:
             mediaid = mastodon.media_post(self.config['media']['custom'])
-            mastodon.status_post(self.toot, media_ids=[mediaid], visibility=toot_visibility)
+            mastodon.status_post(self.toot, media_ids=[mediaid], visibility=toot_visibility, content_type=self.options['toot_content_type'])
         else:
-            mastodon.status_post(self.toot, visibility=toot_visibility)
+            mastodon.status_post(self.toot, visibility=toot_visibility, content_type=self.options['toot_content_type'])
 
     def storeit(self):
         '''Indicate if the tweet should be stored or not'''
