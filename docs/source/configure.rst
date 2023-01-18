@@ -157,9 +157,9 @@ You can use specific pattern matching for uri in the uri_list file to filter som
     https://www.journalduhacker.net/rss|title|hacker,psql
     https://carlchenet.com/feed|title|gitlab
 
-Each line of this file starts with an uri, followed by a pipe (|), followed by the name of the available section to parse (see below), again followed by a pipe (|), followed by patterns, each pattern being separated from the other one by a semi-colon (,).
+Each line of this file starts with an uri, followed by a pipe (|), followed by the name of the available section to parse (see below), again followed by a pipe (|), followed by patterns, each pattern being separated from the other one by a comma (,).
 
-In the example file above wee get every rss entries from the feed available at https://www.journalduhacker.net/rss where a substring in the title section of this entry matches either "hacker" or "psql". Specific patterns are not case sensitive. For the second line, we match every rss entries from the feed available at https://carlchenet.com/feed where a substring in the title section of this entry matches "gitlab".
+In the example file above we get every rss entries from the feed available at https://www.journalduhacker.net/rss where a substring in the title section of this entry matches either "hacker" or "psql". Specific patterns are not case sensitive. For the second line, we match every rss entries from the feed available at https://carlchenet.com/feed where a substring in the title section of this entry matches "gitlab".
 
 Consider every entries of a rss feed from a uri in the uri_list file
 --------------------------------------------------------------------
