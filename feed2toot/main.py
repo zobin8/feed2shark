@@ -43,6 +43,7 @@ from feed2toot.plugins import activate_plugins
 from feed2toot.rss import populate_rss
 from feed2toot.sortentries import sort_entries
 
+
 class Main:
     '''Main class of Feed2toot'''
 
@@ -103,6 +104,15 @@ class Main:
                     sys.exit(0)
                 # sort entries and check if they were not previously sent
                 totweet = sort_entries(clioptions.all, cache, entries)
+                # get language of the feed
+                # language code should conform to ISO-639-1
+                if 'language' in feed['feed']['feed']:
+                    # Only the first two letters count ...
+                    language = feed['feed']['feed']['language'][:2]
+                else:
+                    language = 'en'
+                print("Language of feeds: {}".format(language))
+
                 for entry in totweet:
                     # populate rss with new entry to send
                     rss = populate_rss(entry)
@@ -111,8 +121,8 @@ class Main:
                     elements = re.findall(r"\{(.*?)\}",tweetformat)
                     # strip : from elements to allow string formating, eg. {title:.20}
                     for i,s in enumerate(elements):
-                         if s.find(':'):
-                             elements[i] = s.split(':')[0]
+                        if s.find(':'):
+                            elements[i] = s.split(':')[0]
                     fe = FilterEntry(elements, entry, options, feed['patterns'], feed['rssobject'], feed['feedname'])
                     entrytosend = fe.finalentry
                     if entrytosend:
@@ -120,7 +130,7 @@ class Main:
                         if clioptions.dryrun:
                             send_message_dry_run(config, entrytosend, finaltweet)
                         else:
-                            send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss)
+                            send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss, language)
                             # plugins
                             if plugins and entrytosend:
                                 activate_plugins(plugins, finaltweet)

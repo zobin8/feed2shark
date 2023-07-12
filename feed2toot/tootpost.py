@@ -21,12 +21,13 @@ from mastodon import Mastodon
 class TootPost:
     '''TootPost class'''
 
-    def __init__(self, config, options, toot):
+    def __init__(self, config, options, toot, lang):
         '''Constructore of the TootPost class'''
         self.config = config
         self.options = options
         self.store = True
         self.toot = toot
+        self.lang = lang
         self.main()
 
     def main(self):
@@ -39,9 +40,9 @@ class TootPost:
         toot_visibility = self.config.get('mastodon', 'toot_visibility', fallback='public')
         if 'custom' in self.options['media']:
             mediaid = mastodon.media_post(self.config['media']['custom'])
-            mastodon.status_post(self.toot, media_ids=[mediaid], visibility=toot_visibility)
+            mastodon.status_post(self.toot, media_ids=[mediaid], visibility=toot_visibility, language=self.lang)
         else:
-            mastodon.status_post(self.toot, visibility=toot_visibility)
+            mastodon.status_post(self.toot, visibility=toot_visibility, language=self.lang)
 
     def storeit(self):
         '''Indicate if the tweet should be stored or not'''
