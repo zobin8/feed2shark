@@ -103,6 +103,12 @@ class Main:
                     sys.exit(0)
                 # sort entries and check if they were not previously sent
                 totweet = sort_entries(clioptions.all, cache, entries)
+                # get language of the feed
+                # language code should conform to ISO-639-1
+                if 'language' in feed['feed']:
+                   language = feed['feed']['language']
+                else:
+                    language = 'en'
                 for entry in totweet:
                     # populate rss with new entry to send
                     rss = populate_rss(entry)
@@ -120,7 +126,7 @@ class Main:
                         if clioptions.dryrun:
                             send_message_dry_run(config, entrytosend, finaltweet)
                         else:
-                            send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss)
+                            send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss, language)
                             # plugins
                             if plugins and entrytosend:
                                 activate_plugins(plugins, finaltweet)

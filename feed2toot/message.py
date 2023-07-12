@@ -64,7 +64,7 @@ def send_message_dry_run(config, entrytosend, finaltweet):
     else:
         logging.debug('This rss entry did not meet pattern criteria. Should have not been sent')
 
-def send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss):
+def send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss, language):
     '''send message'''
     storeit = True
     if entrytosend and not clioptions.populate:
@@ -73,7 +73,7 @@ def send_message(config, clioptions, options, entrytosend, finaltweet, cache, rs
             visibility=config.get(
                 'mastodon', 'toot_visibility',
                 fallback='public')))
-        twp = TootPost(config, options, finaltweet)
+        twp = TootPost(config, options, finaltweet, language)
         storeit = twp.storeit()
     else:
         logging.debug('populating RSS entry {}'.format(rss['id']))
