@@ -25,7 +25,8 @@ import sys
 import re
 
 # external liraries imports
-from bs4 import BeautifulSoup
+import warnings
+from bs4 import BeautifulSoup, MarkupResemblesLocatorWarning
 
 # app libraries imports
 from feed2toot.addtags import AddTags
@@ -68,6 +69,8 @@ class Main:
 
     def main(self):
         '''The main function'''
+        warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
+
         clip = CliParse()
         clioptions = clip.options
         self.setup_logging(clioptions)
