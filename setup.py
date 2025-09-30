@@ -42,7 +42,7 @@ setup(
     download_url='https://gitlab.com/chaica/feed2toot',
     packages=find_packages(),
     scripts=['scripts/feed2toot', 'scripts/register_feed2toot_app'],
-    install_requires=['beautifulsoup4', 'feedparser', 'Mastodon.py'],
+    install_requires=['beautifulsoup4', 'feedparser'],
     extras_require={
         'influxdb':  ["influxdb"]
     }

@@ -56,11 +56,12 @@ def build_message(entrytosend, tweetformat, rss, tootmaxlen, notagsintoot):
 def send_message_dry_run(config, entrytosend, finaltweet):
     '''simulate sending message using dry run mode'''
     if entrytosend:
-        logging.warning('Would toot with visibility "{visibility}": {toot}'.format(
+        logging.warning('Would toot with visibility "{visibility}" and local_only "{local_only}": {toot}'.format(
             toot=finaltweet,
             visibility=config.get(
                 'mastodon', 'toot_visibility',
-                fallback='public')))
+                fallback='public'),
+            local_only=config.get('mastodon', 'local_only', fallback='false') != 'false'))
     else:
         logging.debug('This rss entry did not meet pattern criteria. Should have not been sent')
 

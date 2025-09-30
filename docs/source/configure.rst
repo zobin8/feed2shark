@@ -39,6 +39,8 @@ In order to configure Feed2toot, you need to create a feed2toot.ini file (or any
     client_credentials=/etc/feed2toot/credentials/feed2toot_clientcred.txt
     ; Default visibility is public, but you can override it:
     ; toot_visibility=unlisted
+    ; Default local_only is false, but you can override it:
+    ; local_only=true
 
     [cache]
     cachefile=/var/lib/feed2toot/feed2toot.db
@@ -77,6 +79,7 @@ For the [mastodon] section:
   `here`__.
   Default is *public*, but *unlisted* prevents flooding
   the instance's public timeline (which is more polite).
+- local_only: should be "true" or "false". If true, will prevent federating your toots
 
 __ https://github.com/tootsuite/documentation/blob/master/Using-the-API/API.md#posting-a-new-status
 

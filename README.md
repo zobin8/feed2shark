@@ -41,6 +41,8 @@ If you like Feed2toot, you can donate cryptocurrencies to support the developmen
         client_credentials=feed2toot_clientcred.txt
         ; Default visibility is public, but you can override it:
         ; toot_visibility=unlisted
+        ; Default local_only is false, but you can override it:
+        ; local_only=true
 
         [cache]
         cachefile=cache.db

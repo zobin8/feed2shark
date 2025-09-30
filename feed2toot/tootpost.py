@@ -16,7 +16,8 @@
 """Checks an RSS feed and posts new entries to Mastodon."""
 
 # 3rd party libraries imports
-from mastodon import Mastodon
+import requests
+import logging
 
 class TootPost:
     '''TootPost class'''
@@ -31,17 +32,31 @@ class TootPost:
 
     def main(self):
         '''Main of the TweetPost class'''
-        mastodon = Mastodon(
-            client_id=self.config.get('mastodon', 'client_credentials'),
-            access_token=self.config.get('mastodon', 'user_credentials'),
-            api_base_url=self.config.get('mastodon', 'instance_url')
-        )
+        
+        instance = self.config.get('mastodon', 'instance_url')
+        usercredfile = self.config.get('mastodon', 'user_credentials')
         toot_visibility = self.config.get('mastodon', 'toot_visibility', fallback='public')
+        local_only = self.config.get('mastodon', 'local_only', fallback='false') != 'false'
+
+        # ZTODO: Cache file contents
+        with open(usercredfile, 'r', encoding='utf-8') as f:
+            token = f.read().strip()
+            headers = dict(Authorization='Bearer ' + token)
+
+        media_ids = []
         if 'custom' in self.options['media']:
-            mediaid = mastodon.media_post(self.config['media']['custom'])
-            mastodon.status_post(self.toot, media_ids=[mediaid], visibility=toot_visibility)
+            # ZTODO: Upload media
+            response = requests.post(f'{instance}/api/drive/files/create', headers=headers, files=dict())
+            media_ids.append(response['createdNote']['id'])
         else:
-            mastodon.status_post(self.toot, visibility=toot_visibility)
+            # ZTODO: Use module for sharkey API
+            response = requests.post(f'{instance}/api/notes/create', headers=headers, json=dict(
+                text=self.toot,
+                localOnly=local_only,
+                visibility=toot_visibility,
+            ))
+            if response.status_code != 200:
+                logging.error(response.status_code, response.json())
 
     def storeit(self):
         '''Indicate if the tweet should be stored or not'''
