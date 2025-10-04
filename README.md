@@ -1,12 +1,6 @@
 ### feed2shark
 
-feed2shark automatically parses rss feeds, identifies new posts and posts them on the [Mastodon](https://mastodon.social) social network.
-For the full documentation, [read it online](https://feed2shark.readthedocs.io/en/latest/).
-
-If you like feed2shark, you can donate cryptocurrencies to support the development:
-
-- BTC: 1AW12Zw93rx4NzWn5evcG7RNNEM2RSLmAC
-- XMR: 82VFaMG55AnW1MDgsmKgwUShT2MaiSi7AUY9DQANf7BWK3HdQBKwz58EcxshAWZGkV2A3KPGN6vqRjjvQWsr4jf6Dhc2kEC
+feed2shark automatically parses rss feeds, identifies new posts and posts them on a Sharkey instance.
 
 ### Quick Install
 
@@ -15,30 +9,29 @@ If you like feed2shark, you can donate cryptocurrencies to support the developme
         # pip3 install feed2shark
 
 * Install feed2shark from sources
-  *(see the installation guide for full details)
-  [Installation Guide](http://feed2shark.readthedocs.io/en/latest/install.html)*
 
-
-        # tar zxvf feed2shark-0.17.tar.gz
+        # tar zxvf feed2shark-0.18.tar.gz
         # cd feed2shark
-        # python3 setup.py install
-        # # or
-        # python3 setup.py install --install-scripts=/usr/bin
+        # python3 -m venv .venv
+        # source .venv/bin/activate
+        # pip install .
 
-### Create the authorization for the feed2shark app
+### Create the API token for the feed2shark app:
 
-* Just launch the following command::
-
-        $ register_feed2shark_app
+* On your Sharkey account, navigate to the Settings menu
+* Select the "Service Integration" section
+* Click "Generate Access Token"
+* Check the "Edit or delete your Drive files and folders" option
+* Check the "Compose or delete notes" option
+* Create the token and save it to a text file (e.g. feed2shark_usercred.txt)
 
 ### Use feed2shark
 
 * Create or modify feed2shark.ini file in order to configure feed2shark:
 
         [mastodon]
-        instance_url=https://mastodon.social
+        instance_url=https://blahaj.zone
         user_credentials=feed2shark_usercred.txt
-        client_credentials=feed2shark_clientcred.txt
         ; Default visibility is public, but you can override it:
         ; toot_visibility=unlisted
         ; Default local_only is false, but you can override it:
@@ -48,7 +41,7 @@ If you like feed2shark, you can donate cryptocurrencies to support the developme
         cachefile=cache.db
 
         [rss]
-        uri=https://www.journalduhacker.net/rss
+        uri=https://xkcd.com/rss
         toot={title} {link}
 
         [hashtaglist]
@@ -60,6 +53,9 @@ If you like feed2shark, you can donate cryptocurrencies to support the developme
 
 ### Authors
 
+* zobin8
+
+Based on feed2toot by:
 * Carl Chenet <carl.chenet@ohmytux.com>
 * Antoine Beaupré <anarcat@debian.org>
 * First developed by Todd Eddy
