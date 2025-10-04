@@ -93,5 +93,5 @@ Example with full options and full output::
     Mastodon login: toto@titi.com
     Mastodon password: 
 
-    The app f2t was added to your preferences=>authorized apps page.
+    The app f2t was added to your preferences=>authorized apps page.
     The file f2tclientcreds.txt and f2tusercreds.txt were created in the current directory.

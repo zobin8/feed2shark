@@ -8,3 +8,5 @@ feedlist
 *.txt
 *.bck
 *.png
+build
+feed2toot.egg-info
