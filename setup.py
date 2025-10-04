@@ -13,8 +13,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 #!/usr/bin/env python3
 
-# Setup for Feed2toot
-'''Setup for Feed2toot'''
+# Setup for feed2shark
+'''Setup for feed2shark'''
 
 from setuptools import setup, find_packages
 
@@ -30,14 +30,14 @@ CLASSIFIERS = [
 ]
 
 setup(
-    name='feed2toot',
+    name='feed2shark',
     version='0.17',
     license='GNU GPL v3',
     description='Parse rss feeds and send new posts to Sharkey',
     long_description='Parse rss feeds and send new posts to the Sharkey API',
     classifiers=CLASSIFIERS,
     packages=find_packages(),
-    scripts=['scripts/feed2toot'],
+    scripts=['scripts/feed2shark'],
     install_requires=['beautifulsoup4', 'feedparser', 'requests'],
     extras_require={
         'influxdb':  ["influxdb"]

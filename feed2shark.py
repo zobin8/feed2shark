@@ -14,21 +14,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-# Launch Feed2toot
-'''Launch Feed2toot'''
+# Launch feed2shark
+'''Launch feed2shark'''
 
 import sys
-from feed2toot.main import Main
+from feed2shark.main import Main
 
-class Feed2Toot(object):
-    '''Feed2toot class'''
+class feed2shark(object):
+    '''feed2shark class'''
 
     def __init__(self):
-        '''Constructor of the Feed2Toot class'''
+        '''Constructor of the feed2shark class'''
         self.main()
 
     def main(self):
-        '''main of the Feed2Toot class'''
+        '''main of the feed2shark class'''
         Main()
 
 if __name__ == '__main__':

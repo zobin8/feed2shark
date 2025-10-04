@@ -1,36 +1,36 @@
-Use Feed2toot
+Use feed2shark
 ==============
-After the configuration of Feed2toot, just launch the following command::
+After the configuration of feed2shark, just launch the following command::
 
-    $ feed2toot -c /path/to/feed2toot.ini
+    $ feed2shark -c /path/to/feed2shark.ini
 
-Run Feed2toot on a regular basis
+Run feed2shark on a regular basis
 ---------------------------------
-Feed2toot should be launched on a regular basis in order to efficiently send your new RSS entries to Mastodon. It is quite easy to achieve by adding a line to your user crontab, as described below::
+feed2shark should be launched on a regular basis in order to efficiently send your new RSS entries to Mastodon. It is quite easy to achieve by adding a line to your user crontab, as described below::
 
-    @hourly feed2toot -c /path/to/feed2toot.ini
+    @hourly feed2shark -c /path/to/feed2shark.ini
 
-will execute feed2toot every hour. Or without the syntactic sugar in the global crontab file /etc/crontab::
+will execute feed2shark every hour. Or without the syntactic sugar in the global crontab file /etc/crontab::
 
-    0 * * * * johndoe feed2toot -c /path/to/feed2toot.ini
+    0 * * * * johndoe feed2shark -c /path/to/feed2shark.ini
 
 Test option
 -----------
 In order to know what's going to be sent to Mastodon without actually doing it, use the **--dry-run** option::
 
-    $ feed2toot --dry-run -c /path/to/feed2toot.ini
+    $ feed2shark --dry-run -c /path/to/feed2shark.ini
 
 Debug option
 ------------
-In order to increase the verbosity of what's Feed2toot is doing, use the **--debug** option followed by the level of verbosity see [the the available different levels](https://docs.python.org/3/library/logging.html)::
+In order to increase the verbosity of what's feed2shark is doing, use the **--debug** option followed by the level of verbosity see [the the available different levels](https://docs.python.org/3/library/logging.html)::
 
-    $ feed2toot --debug -c /path/to/feed2toot.ini
+    $ feed2shark --debug -c /path/to/feed2shark.ini
 
 Populate the cache file without posting toots
 ---------------------------------------------
-Starting from 0.8, Feed2toot offers the **--populate-cache** command line option to populate the cache file without posting to Mastodon::
+Starting from 0.8, feed2shark offers the **--populate-cache** command line option to populate the cache file without posting to Mastodon::
 
-    $ feed2toot --populate-cache -c feed2toot.ini
+    $ feed2shark --populate-cache -c feed2shark.ini
     populating RSS entry https://www.journalduhacker.net/s/65krkk
     populating RSS entry https://www.journalduhacker.net/s/co2es0
     populating RSS entry https://www.journalduhacker.net/s/la2ihl
@@ -44,46 +44,46 @@ Starting from 0.8, Feed2toot offers the **--populate-cache** command line option
 
 How to display available sections of the rss feed
 -------------------------------------------------
-Starting from 0.8, Feed2toot offers the **--rss-sections** command line option to display the available section of the rss feed and exits::
+Starting from 0.8, feed2shark offers the **--rss-sections** command line option to display the available section of the rss feed and exits::
 
-    $ feed2toot --rss-sections -c feed2toot.ini
+    $ feed2shark --rss-sections -c feed2shark.ini
     The following sections are available in this RSS feed: ['title', 'comments', 'authors', 'link', 'author', 'summary', 'links', 'tags', id', 'author_detail', 'published'].
 
 Using syslog
 ------------
-Feed2toot is able to send its log to syslog. You can use it with the following command::
+feed2shark is able to send its log to syslog. You can use it with the following command::
 
-    $ feed2toot --syslog=WARN -c /path/to/feed2toot.ini
+    $ feed2shark --syslog=WARN -c /path/to/feed2shark.ini
 
 Limit number of rss entries published at each execution
 -------------------------------------------------------
 If you want to limit the number of rss entries published at each execution, you can use the --limit CLI option.
 
-    $ feed2toot --limit 5 -c /path/to/feed2toot.ini
+    $ feed2shark --limit 5 -c /path/to/feed2shark.ini
 
 The number of posts to Mastodon will be at 5 posts top with this CLI option.
 
-Use register_feed2toot_app
+Use register_feed2shark_app
 ==========================
-You need a Mastodon app associated to a user on the Mastodon instance. The script register_feed2toot_app will create an app for Feed2toot and upload it on the specified Mastodon instance.
+You need a Mastodon app associated to a user on the Mastodon instance. The script register_feed2shark_app will create an app for feed2shark and upload it on the specified Mastodon instance.
 
 Primary usage ::
 
-    $ register_feed2toot_app
+    $ register_feed2shark_app
 
 Possible CLI options:
 
-- use the **--client-credentials-file** option to change the filename in which the client credentials are stored (defaults to feed2toot_clientcred.txt)
-- use the **--user-credentials-file** option to change the filename in which the user credentials are stored (defaults to feed2toot_usercred.txt)
-- use the **--name** to change the Mastodon app name (defaults to feed2toot)
+- use the **--client-credentials-file** option to change the filename in which the client credentials are stored (defaults to feed2shark_clientcred.txt)
+- use the **--user-credentials-file** option to change the filename in which the user credentials are stored (defaults to feed2shark_usercred.txt)
+- use the **--name** to change the Mastodon app name (defaults to feed2shark)
 
 Example with full options and full output::
 
-    $ ./register_feed2toot_app --user-credentials-file f2tusercreds.txt --client-credentials-file f2tclientcreds.txt --name f2t
+    $ ./register_feed2shark_app --user-credentials-file f2tusercreds.txt --client-credentials-file f2tclientcreds.txt --name f2t
     
-    This script generates the Mastodon application credentials for Feed2toot.
+    This script generates the Mastodon application credentials for feed2shark.
     f2tclientcreds.txt and f2tusercreds.txt will be written
-    in the current directory: /home/me/feed2toot/scripts.
+    in the current directory: /home/me/feed2shark/scripts.
     WARNING: previous files with the same names will be overwritten.
     
     A connection is also initiated to create the application.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# feed2toot documentation build configuration file, created by
+# feed2shark documentation build configuration file, created by
 # sphinx-quickstart on Wed Dec 17 18:25:26 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -47,7 +47,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'feed2toot'
+project = 'feed2shark'
 copyright = '2015-2021, Carl Chenet <carl.chenet@ohmytux.com>'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -180,7 +180,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'feed2tootdoc'
+htmlhelp_basename = 'feed2sharkdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -200,7 +200,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'feed2toot.tex', 'feed2toot Documentation',
+  ('index', 'feed2shark.tex', 'feed2shark Documentation',
    'Carl Chenet \\textless{}carl.chenet@ohmytux.com.org\\textgreater{}', 'manual'),
 ]
 
@@ -230,7 +230,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'feed2toot', 'feed2toot Documentation',
+    ('index', 'feed2shark', 'feed2shark Documentation',
      ['Carl Chenet <carl.chenet@ohmytux.com>'], 1)
 ]
 
@@ -244,8 +244,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'feed2toot', 'feed2toot Documentation',
-   'Carl Chenet <carl.chenet@ohmytux.com>', 'feed2toot', 'One line description of project.',
+  ('index', 'feed2shark', 'feed2shark Documentation',
+   'Carl Chenet <carl.chenet@ohmytux.com>', 'feed2shark', 'One line description of project.',
    'Miscellaneous'),
 ]
 

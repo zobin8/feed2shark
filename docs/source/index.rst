@@ -1,8 +1,8 @@
-Documentation for the Feed2toot project
+Documentation for the feed2shark project
 =======================================
 
-Feed2toot parses a RSS feed, extracts the last entries and sends them to Mastodon.
-You'll find below anything you need to install, configure or run Feed2toot.
+feed2shark parses a RSS feed, extracts the last entries and sends them to Mastodon.
+You'll find below anything you need to install, configure or run feed2shark.
 
 Guide
 =====

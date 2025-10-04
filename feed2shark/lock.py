@@ -43,7 +43,7 @@ class LockFile:
                     self.release()
                     self.create_lock()
                 else:
-                    # quit because another feed2toot process is running
+                    # quit because another feed2shark process is running
                     logging.debug('Found a valid lock file. Exiting immediately.')
                     sys.exit(0)
         else:

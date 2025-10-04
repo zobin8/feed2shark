@@ -31,7 +31,7 @@ def parsetoot(config):
         confoption = 'toot'
         # manage 'tweet' for compatibility reason with first versions
         if config.has_option(section, oldconfoption):
-            logging.warn("Your configuration file uses a 'tweet' parameter instead of 'toot'. 'tweet' is deprecated and will be removed in Feed2toot 0.7")
+            logging.warn("Your configuration file uses a 'tweet' parameter instead of 'toot'. 'tweet' is deprecated and will be removed in feed2shark 0.7")
             tootformat = config.get(section, oldconfoption)
         elif config.has_option(section, confoption):
             tootformat = config.get(section, confoption)

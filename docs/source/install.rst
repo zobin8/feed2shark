@@ -1,8 +1,8 @@
-How to install Feed2toot
+How to install feed2shark
 ========================
 From PyPI
 ^^^^^^^^^
-    $ pip3 install feed2toot
+    $ pip3 install feed2shark
 
 From sources
 ^^^^^^^^^^^^
@@ -25,10 +25,10 @@ Alternatively, Setuptools may be installed to a user-local path::
 
 * Untar the tarball and go to the source directory with the following commands::
 
-    $ tar zxvf feed2toot-0.17.tar.gz
-    $ cd feed2toot
+    $ tar zxvf feed2shark-0.17.tar.gz
+    $ cd feed2shark
 
-* Next, to install Feed2toot on your computer, type the following command with the root user::
+* Next, to install feed2shark on your computer, type the following command with the root user::
 
     $ python3 setup.py install
     $ # or

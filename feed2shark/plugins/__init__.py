@@ -22,7 +22,7 @@ def activate_plugins(plugins, finaltweet):
     for plugin in plugins:
         capitalizedplugin = plugin.title()
         pluginclassname = '{plugin}Plugin'.format(plugin=capitalizedplugin)
-        pluginmodulename = 'feed2toot.plugins.{pluginmodule}'.format(pluginmodule=pluginclassname.lower())
+        pluginmodulename = 'feed2shark.plugins.{pluginmodule}'.format(pluginmodule=pluginclassname.lower())
         try:
             pluginmodule = importlib.import_module(pluginmodulename)
             pluginclass = getattr(pluginmodule, pluginclassname)

@@ -1,44 +1,44 @@
-### Feed2toot
+### feed2shark
 
-Feed2toot automatically parses rss feeds, identifies new posts and posts them on the [Mastodon](https://mastodon.social) social network.
-For the full documentation, [read it online](https://feed2toot.readthedocs.io/en/latest/).
+feed2shark automatically parses rss feeds, identifies new posts and posts them on the [Mastodon](https://mastodon.social) social network.
+For the full documentation, [read it online](https://feed2shark.readthedocs.io/en/latest/).
 
-If you like Feed2toot, you can donate cryptocurrencies to support the development:
+If you like feed2shark, you can donate cryptocurrencies to support the development:
 
 - BTC: 1AW12Zw93rx4NzWn5evcG7RNNEM2RSLmAC
 - XMR: 82VFaMG55AnW1MDgsmKgwUShT2MaiSi7AUY9DQANf7BWK3HdQBKwz58EcxshAWZGkV2A3KPGN6vqRjjvQWsr4jf6Dhc2kEC
 
 ### Quick Install
 
-* Install Feed2toot from PyPI
+* Install feed2shark from PyPI
 
-        # pip3 install feed2toot
+        # pip3 install feed2shark
 
-* Install Feed2toot from sources
+* Install feed2shark from sources
   *(see the installation guide for full details)
-  [Installation Guide](http://feed2toot.readthedocs.io/en/latest/install.html)*
+  [Installation Guide](http://feed2shark.readthedocs.io/en/latest/install.html)*
 
 
-        # tar zxvf feed2toot-0.17.tar.gz
-        # cd feed2toot
+        # tar zxvf feed2shark-0.17.tar.gz
+        # cd feed2shark
         # python3 setup.py install
         # # or
         # python3 setup.py install --install-scripts=/usr/bin
 
-### Create the authorization for the Feed2toot app
+### Create the authorization for the feed2shark app
 
 * Just launch the following command::
 
-        $ register_feed2toot_app
+        $ register_feed2shark_app
 
-### Use Feed2toot
+### Use feed2shark
 
-* Create or modify feed2toot.ini file in order to configure feed2toot:
+* Create or modify feed2shark.ini file in order to configure feed2shark:
 
         [mastodon]
         instance_url=https://mastodon.social
-        user_credentials=feed2toot_usercred.txt
-        client_credentials=feed2toot_clientcred.txt
+        user_credentials=feed2shark_usercred.txt
+        client_credentials=feed2shark_clientcred.txt
         ; Default visibility is public, but you can override it:
         ; toot_visibility=unlisted
         ; Default local_only is false, but you can override it:
@@ -54,9 +54,9 @@ If you like Feed2toot, you can donate cryptocurrencies to support the developmen
         [hashtaglist]
         several_words_hashtags_list=hashtags.txt
 
-* Launch Feed2toot
+* Launch feed2shark
 
-        $ feed2toot -c /path/to/feed2toot.ini
+        $ feed2shark -c /path/to/feed2shark.ini
 
 ### Authors
 

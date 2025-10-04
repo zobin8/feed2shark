@@ -28,23 +28,23 @@ import re
 from bs4 import BeautifulSoup
 
 # app libraries imports
-from feed2toot.addtags import AddTags
-from feed2toot.cliparse import CliParse
-from feed2toot.confparse import ConfParse
-from feed2toot.feedcache import FeedCache
-from feed2toot.filterentry import FilterEntry
-from feed2toot.hashtags import build_hashtags
-from feed2toot.hashtags import extract_hashtags_from_list
-from feed2toot.lock import LockFile
-from feed2toot.message import build_message
-from feed2toot.message import send_message_dry_run
-from feed2toot.message import send_message
-from feed2toot.plugins import activate_plugins
-from feed2toot.rss import populate_rss
-from feed2toot.sortentries import sort_entries
+from feed2shark.addtags import AddTags
+from feed2shark.cliparse import CliParse
+from feed2shark.confparse import ConfParse
+from feed2shark.feedcache import FeedCache
+from feed2shark.filterentry import FilterEntry
+from feed2shark.hashtags import build_hashtags
+from feed2shark.hashtags import extract_hashtags_from_list
+from feed2shark.lock import LockFile
+from feed2shark.message import build_message
+from feed2shark.message import send_message_dry_run
+from feed2shark.message import send_message
+from feed2shark.plugins import activate_plugins
+from feed2shark.rss import populate_rss
+from feed2shark.sortentries import sort_entries
 
 class Main:
-    '''Main class of Feed2toot'''
+    '''Main class of feed2shark'''
 
     def __init__(self):
         self.main()
@@ -52,7 +52,7 @@ class Main:
     def setup_logging(self, options):
         if options.syslog:
             sl = logging.handlers.SysLogHandler(address='/dev/log')
-            sl.setFormatter(logging.Formatter('feed2toot[%(process)d]: %(message)s'))
+            sl.setFormatter(logging.Formatter('feed2shark[%(process)d]: %(message)s'))
             # convert syslog argument to a numeric value
             loglevel = getattr(logging, options.syslog.upper(), None)
             if not isinstance(loglevel, int):

@@ -14,11 +14,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-# Feed2toot startup
-'''Feed2toot startup'''
+# feed2shark startup
+'''feed2shark startup'''
 
 import sys
-from feed2toot.main import Main
+from feed2shark.main import Main
 
 if __name__ == '__main__':
     Main()

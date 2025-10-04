@@ -1,6 +1,6 @@
 Plugins
 =======
-Feed2toot supports plugins. Plugins offer optional features, not supported by default. Optional means you need a dedicated configuration and sometimes a dedicated external dependencies. What you need for each module is specified below.
+feed2shark supports plugins. Plugins offer optional features, not supported by default. Optional means you need a dedicated configuration and sometimes a dedicated external dependencies. What you need for each module is specified below.
 
 InfluxDB
 --------
@@ -8,19 +8,19 @@ The InfluxDB plugin allows to store already published toots in a InfluxDB databa
 
 Install the InfluxDB plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-To install Feed2toot with the InfluxDB plugin, execute the following command.
+To install feed2shark with the InfluxDB plugin, execute the following command.
 
 From scratch::
 
-    # pip3 install feed2toot[influxdb]
+    # pip3 install feed2shark[influxdb]
 
 Upgrading from a previous version, execute the followin command::
 
-    # pip3 install feed2toot[influxdb] --upgrade
+    # pip3 install feed2shark[influxdb] --upgrade
 
 Configuration
 ^^^^^^^^^^^^^
-Below is the block of configuration to add in your feed2toot.ini::
+Below is the block of configuration to add in your feed2shark.ini::
 
     [influxdb]
     ;host=127.0.0.1

@@ -43,7 +43,7 @@ class RemoveDuplicates:
         for i in range(len(links)):
             if links[i]['count'] >= 2:
                 validatedlinks.append(links[i])
-        wildcard = 'FEED2TOOTWILDCARD'
+        wildcard = 'feed2sharkWILDCARD'
         for element in validatedlinks:
             for i in range(element['count']):
                 # needed for not inversing the order of links if it is a duplicate

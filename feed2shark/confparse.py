@@ -28,21 +28,21 @@ import re
 # 3rd party library imports
 import feedparser
 
-# feed2toot library imports
-from feed2toot.confparsers.cache import parsecache
-from feed2toot.confparsers.hashtaglist import parsehashtaglist
-from feed2toot.confparsers.hashtags.nohashtags import parsenotagsintoot
-from feed2toot.confparsers.feedparser import parsefeedparser
-from feed2toot.confparsers.lock import parselock
-from feed2toot.confparsers.media import parsemedia
-from feed2toot.confparsers.plugins import parseplugins
-from feed2toot.confparsers.rss.ignoressl import parseignoressl
-from feed2toot.confparsers.rss.pattern import parsepattern
-from feed2toot.confparsers.rss.toot import parsetoot
-from feed2toot.confparsers.rss.uri import parseuri
-from feed2toot.confparsers.rss.urilist import parseurilist
-from feed2toot.confparsers.rss.addtags import parseaddtags
-from feed2toot.confparsers.rss.tootmaxlen import parsetootmaxlen
+# feed2shark library imports
+from feed2shark.confparsers.cache import parsecache
+from feed2shark.confparsers.hashtaglist import parsehashtaglist
+from feed2shark.confparsers.hashtags.nohashtags import parsenotagsintoot
+from feed2shark.confparsers.feedparser import parsefeedparser
+from feed2shark.confparsers.lock import parselock
+from feed2shark.confparsers.media import parsemedia
+from feed2shark.confparsers.plugins import parseplugins
+from feed2shark.confparsers.rss.ignoressl import parseignoressl
+from feed2shark.confparsers.rss.pattern import parsepattern
+from feed2shark.confparsers.rss.toot import parsetoot
+from feed2shark.confparsers.rss.uri import parseuri
+from feed2shark.confparsers.rss.urilist import parseurilist
+from feed2shark.confparsers.rss.addtags import parseaddtags
+from feed2shark.confparsers.rss.tootmaxlen import parsetootmaxlen
 
 class ConfParse:
     '''ConfParse class'''

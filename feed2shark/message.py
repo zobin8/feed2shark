@@ -23,9 +23,9 @@ import logging
 from bs4 import BeautifulSoup
 
 # app libraries imports
-from feed2toot.addtags import AddTags
-from feed2toot.removeduplicates import RemoveDuplicates
-from feed2toot.tootpost import TootPost
+from feed2shark.addtags import AddTags
+from feed2shark.removeduplicates import RemoveDuplicates
+from feed2shark.tootpost import TootPost
 
 def build_message(entrytosend, tweetformat, rss, tootmaxlen, notagsintoot):
     '''populate the rss dict with the new entry'''

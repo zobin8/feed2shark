@@ -34,15 +34,15 @@ class CliParse:
 
     def main(self):
         '''main of CliParse class'''
-        feed2tootepilog = 'For more information: https://feed2toot.readthedocs.io'
-        feed2tootdescription = 'Take rss feed and send it to Mastodon'
-        parser = ArgumentParser(prog='feed2toot',
-                                description=feed2tootdescription,
-                                epilog=feed2tootepilog)
+        feed2sharkepilog = 'For more information: https://feed2shark.readthedocs.io'
+        feed2sharkdescription = 'Take rss feed and send it to Mastodon'
+        parser = ArgumentParser(prog='feed2shark',
+                                description=feed2sharkdescription,
+                                epilog=feed2sharkepilog)
         parser.add_argument('--version', action='version', version=__version__)
         parser.add_argument('-c', '--config',
                             default=[os.path.join(os.getenv('XDG_CONFIG_HOME', '~/.config'),
-                                                  'feed2toot.ini')],
+                                                  'feed2shark.ini')],
                             nargs='+',
                             dest="config",
                             help='Location of config file (default: %(default)s)',
@@ -56,12 +56,12 @@ class CliParse:
         parser.add_argument('-l', '--limit', dest='limit', default=10, type=int,
                             help='tweet only LIMIT items (default: %(default)s)')
         parser.add_argument('-t', '--lock-timeout', dest='locktimeout', default=3600, type=int,
-                            help='lock timeout in seconds after which feed2toot can removes the lock itself')
+                            help='lock timeout in seconds after which feed2shark can removes the lock itself')
         parser.add_argument('--cachefile', dest='cachefile',
                             help='location of the cache file (default: %(default)s)')
         parser.add_argument('--lockfile', dest='lockfile',
                             default=os.path.join(os.getenv('XDG_CONFIG_HOME', '~/.config'),
-                                                  'feed2toot.lock'),
+                                                  'feed2shark.lock'),
                             help='location of the lock file (default: %(default)s)')
         parser.add_argument('-n', '--dry-run', dest='dryrun',
                             action='store_true', default=False,
