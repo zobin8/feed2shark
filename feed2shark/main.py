@@ -107,6 +107,7 @@ class Main:
                     # populate rss with new entry to send
                     rss = populate_rss(entry)
                     rss = build_hashtags(entry, rss, options, severalwordshashtags)
+                    # ZTODO: Extract images from entry['content'][]['value']
                     # parse tweetfomat to elements
                     elements = re.findall(r"\{(.*?)\}",tweetformat)
                     # strip : from elements to allow string formating, eg. {title:.20}
