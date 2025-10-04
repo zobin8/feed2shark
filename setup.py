@@ -33,16 +33,12 @@ setup(
     name='feed2toot',
     version='0.17',
     license='GNU GPL v3',
-    description='Parse rss feeds and send new posts to Mastodon',
-    long_description='Parse rss feeds and send new posts to the Mastodon social network',
-    author = 'Carl Chenet',
-    author_email = 'carl.chenet@ohmytux.com',
-    url = 'https://gitlab.com/chaica/feed2toot',
+    description='Parse rss feeds and send new posts to Sharkey',
+    long_description='Parse rss feeds and send new posts to the Sharkey API',
     classifiers=CLASSIFIERS,
-    download_url='https://gitlab.com/chaica/feed2toot',
     packages=find_packages(),
-    scripts=['scripts/feed2toot', 'scripts/register_feed2toot_app'],
-    install_requires=['beautifulsoup4', 'feedparser'],
+    scripts=['scripts/feed2toot'],
+    install_requires=['beautifulsoup4', 'feedparser', 'requests'],
     extras_require={
         'influxdb':  ["influxdb"]
     }
