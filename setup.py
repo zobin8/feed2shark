@@ -31,7 +31,7 @@ CLASSIFIERS = [
 
 setup(
     name='feed2shark',
-    version='0.17',
+    version='0.18',
     license='GNU GPL v3',
     description='Parse rss feeds and send new posts to Sharkey',
     long_description='Parse rss feeds and send new posts to the Sharkey API',

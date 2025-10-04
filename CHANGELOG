@@ -1,3 +1,8 @@
+## [0.18] - 2025-10-03
+### Changed
+- Forked from feed2toot
+- Changed backend from Mastodon to Sharkey
+
 ## [0.17] - 2021-03-26
 ### Changed
 - fix install bug while installing from sources
