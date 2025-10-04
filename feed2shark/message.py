@@ -21,15 +21,47 @@ import logging
 
 # external liraries imports
 from bs4 import BeautifulSoup
+from bs4 import element
+import feedparser
 
 # app libraries imports
 from feed2shark.addtags import AddTags
 from feed2shark.removeduplicates import RemoveDuplicates
 from feed2shark.tootpost import TootPost
 
+def strip_mfm(text):
+    '''strip markup characters'''
+    return ''.join([ch for ch in text if ch not in '[]() '])
+
+def build_message_item(item):
+    '''parse an item from an entry with unknown type recursively'''
+    if type(item) == list:
+        return ''.join([build_message_item(elem) for elem in item])
+    elif type(item) == feedparser.util.FeedParserDict:
+        print(item)
+        return build_message_item(BeautifulSoup(item['value'], 'html.parser').contents)
+    elif type(item) == element.Tag:
+        if item.name == 'a' and 'href' in item.attrs:
+            contents = strip_mfm(build_message_item(item.contents))
+            if len(contents) == 0:
+                return ''
+            return f'[{contents}]({item.attrs["href"]})'
+        elif item.name == 'p':
+            return build_message_item(item.contents) + '\n\n'
+        elif item.name == 'br':
+            return '\n\n'
+        return build_message_item(item.contents)
+    elif type(item) == element.NavigableString:
+        return str(item)
+    elif type(item) == str:
+        return item
+
+    return ''
+
 def build_message(entrytosend, tweetformat, rss, tootmaxlen, notagsintoot):
     '''populate the rss dict with the new entry'''
-    tweetwithnotag = tweetformat.format(**entrytosend)
+    items = {k: build_message_item(v) for k, v in entrytosend.items()}
+    tweetwithnotag = tweetformat.format(**items)
     # replace line breaks
     tootwithlinebreaks = tweetwithnotag.replace('\\n', '\n')
     # remove duplicates from the final tweet
