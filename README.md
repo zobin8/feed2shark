@@ -16,7 +16,7 @@ feed2shark automatically parses rss feeds, identifies new posts and posts them o
         # source .venv/bin/activate
         # pip install .
 
-### Create the API token for the feed2shark app:
+### Create the API token for Sharkey:
 
 * On your Sharkey account, navigate to the Settings menu
 * Select the "Service Integration" section
@@ -29,7 +29,7 @@ feed2shark automatically parses rss feeds, identifies new posts and posts them o
 
 * Create or modify feed2shark.ini file in order to configure feed2shark:
 
-        [mastodon]
+        [sharkey]
         instance_url=https://blahaj.zone
         user_credentials=feed2shark_usercred.txt
         ; Default visibility is public, but you can override it:

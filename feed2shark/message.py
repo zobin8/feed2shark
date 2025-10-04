@@ -60,9 +60,9 @@ def send_message_dry_run(config, entrytosend, finaltweet):
         logging.warning('Would toot with visibility "{visibility}" and local_only "{local_only}": {toot}'.format(
             toot=finaltweet,
             visibility=config.get(
-                'mastodon', 'toot_visibility',
+                'sharkey', 'toot_visibility',
                 fallback='public'),
-            local_only=config.get('mastodon', 'local_only', fallback='false') != 'false'))
+            local_only=config.get('sharkey', 'local_only', fallback='false') != 'false'))
     else:
         logging.debug('This rss entry did not meet pattern criteria. Should have not been sent')
 
@@ -73,7 +73,7 @@ def send_message(config, clioptions, options, entrytosend, finaltweet, cache, rs
         logging.debug('Tooting with visibility "{visibility}": {toot}'.format(
             toot=finaltweet,
             visibility=config.get(
-                'mastodon', 'toot_visibility',
+                'sharkey', 'toot_visibility',
                 fallback='public')))
         twp = TootPost(config, options, finaltweet)
         storeit = twp.storeit()

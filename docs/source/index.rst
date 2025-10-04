@@ -1,7 +1,7 @@
 Documentation for the feed2shark project
 =======================================
 
-feed2shark parses a RSS feed, extracts the last entries and sends them to Mastodon.
+feed2shark parses a RSS feed, extracts the last entries and sends them to Sharkey.
 You'll find below anything you need to install, configure or run feed2shark.
 
 Guide

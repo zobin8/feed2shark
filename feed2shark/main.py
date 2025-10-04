@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-"""Checks an RSS feed and posts new entries to Mastodon."""
+"""Checks an RSS feed and posts new entries to Sharkey."""
 
 # standard libraires imports
 import codecs
@@ -85,7 +85,7 @@ class Main:
             # create link to the persistent list
             cache = FeedCache(options)
             severalwordshashtags = extract_hashtags_from_list(options)
-            # reverse feed entries because most recent one should be sent as the last one in Mastodon
+            # reverse feed entries because most recent one should be sent as the last one in Sharkey
             for feed in feeds:
                 # store the patterns by rss
                 if 'patterns' in feed:

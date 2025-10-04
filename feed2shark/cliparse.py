@@ -35,7 +35,7 @@ class CliParse:
     def main(self):
         '''main of CliParse class'''
         feed2sharkepilog = 'For more information: https://feed2shark.readthedocs.io'
-        feed2sharkdescription = 'Take rss feed and send it to Mastodon'
+        feed2sharkdescription = 'Take rss feed and send it to Sharkey'
         parser = ArgumentParser(prog='feed2shark',
                                 description=feed2sharkdescription,
                                 epilog=feed2sharkepilog)
@@ -84,7 +84,7 @@ class CliParse:
                             help='a list of hashtags to match')
         parser.add_argument('-p', '--populate-cache', action='store_true', default=False,
                             dest='populate',
-                            help='populate RSS entries in cache without actually posting them to Mastodon')
+                            help='populate RSS entries in cache without actually posting them to Sharkey')
         parser.add_argument('-r', '--rss', help='the RSS feed URL to fetch items from',
                             dest='rss_uri', metavar='http://...')
         parser.add_argument('--rss-sections', action='store_true', default=False,

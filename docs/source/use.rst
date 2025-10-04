@@ -6,17 +6,17 @@ After the configuration of feed2shark, just launch the following command::
 
 Run feed2shark on a regular basis
 ---------------------------------
-feed2shark should be launched on a regular basis in order to efficiently send your new RSS entries to Mastodon. It is quite easy to achieve by adding a line to your user crontab, as described below::
+feed2shark should be launched on a regular basis in order to efficiently send your new RSS entries to Sharkey. It is quite easy to achieve by adding a line to your user crontab, as described below::
 
     @hourly feed2shark -c /path/to/feed2shark.ini
 
 will execute feed2shark every hour. Or without the syntactic sugar in the global crontab file /etc/crontab::
 
-    0 * * * * johndoe feed2shark -c /path/to/feed2shark.ini
+    0 * * * * janedoe feed2shark -c /path/to/feed2shark.ini
 
 Test option
 -----------
-In order to know what's going to be sent to Mastodon without actually doing it, use the **--dry-run** option::
+In order to know what's going to be sent to Sharkey without actually doing it, use the **--dry-run** option::
 
     $ feed2shark --dry-run -c /path/to/feed2shark.ini
 
@@ -28,19 +28,19 @@ In order to increase the verbosity of what's feed2shark is doing, use the **--de
 
 Populate the cache file without posting toots
 ---------------------------------------------
-Starting from 0.8, feed2shark offers the **--populate-cache** command line option to populate the cache file without posting to Mastodon::
+Starting from 0.8, feed2shark offers the **--populate-cache** command line option to populate the cache file without posting to Sharkey::
 
     $ feed2shark --populate-cache -c feed2shark.ini
-    populating RSS entry https://www.journalduhacker.net/s/65krkk
-    populating RSS entry https://www.journalduhacker.net/s/co2es0
-    populating RSS entry https://www.journalduhacker.net/s/la2ihl
-    populating RSS entry https://www.journalduhacker.net/s/stfwtx
-    populating RSS entry https://www.journalduhacker.net/s/qq1wte
-    populating RSS entry https://www.journalduhacker.net/s/y8mzrp
-    populating RSS entry https://www.journalduhacker.net/s/ozjqv0
-    populating RSS entry https://www.journalduhacker.net/s/6ev8jz
-    populating RSS entry https://www.journalduhacker.net/s/gezvnv
-    populating RSS entry https://www.journalduhacker.net/s/lqswmz
+    populating RSS entry hhttps://xkcd.com/rss/65krkk
+    populating RSS entry hhttps://xkcd.com/rss/co2es0
+    populating RSS entry hhttps://xkcd.com/rss/la2ihl
+    populating RSS entry hhttps://xkcd.com/rss/stfwtx
+    populating RSS entry hhttps://xkcd.com/rss/qq1wte
+    populating RSS entry hhttps://xkcd.com/rss/y8mzrp
+    populating RSS entry hhttps://xkcd.com/rss/ozjqv0
+    populating RSS entry hhttps://xkcd.com/rss/6ev8jz
+    populating RSS entry hhttps://xkcd.com/rss/gezvnv
+    populating RSS entry hhttps://xkcd.com/rss/lqswmz
 
 How to display available sections of the rss feed
 -------------------------------------------------
@@ -61,37 +61,4 @@ If you want to limit the number of rss entries published at each execution, you 
 
     $ feed2shark --limit 5 -c /path/to/feed2shark.ini
 
-The number of posts to Mastodon will be at 5 posts top with this CLI option.
-
-Use register_feed2shark_app
-==========================
-You need a Mastodon app associated to a user on the Mastodon instance. The script register_feed2shark_app will create an app for feed2shark and upload it on the specified Mastodon instance.
-
-Primary usage ::
-
-    $ register_feed2shark_app
-
-Possible CLI options:
-
-- use the **--client-credentials-file** option to change the filename in which the client credentials are stored (defaults to feed2shark_clientcred.txt)
-- use the **--user-credentials-file** option to change the filename in which the user credentials are stored (defaults to feed2shark_usercred.txt)
-- use the **--name** to change the Mastodon app name (defaults to feed2shark)
-
-Example with full options and full output::
-
-    $ ./register_feed2shark_app --user-credentials-file f2tusercreds.txt --client-credentials-file f2tclientcreds.txt --name f2t
-    
-    This script generates the Mastodon application credentials for feed2shark.
-    f2tclientcreds.txt and f2tusercreds.txt will be written
-    in the current directory: /home/me/feed2shark/scripts.
-    WARNING: previous files with the same names will be overwritten.
-    
-    A connection is also initiated to create the application.
-    Your password is *not* stored.
-    
-    Mastodon instance URL (defaults to https://mastodon.social): https://framapiaf.org
-    Mastodon login: toto@titi.com
-    Mastodon password: 
-
-    The app f2t was added to your preferences=>authorized apps page.
-    The file f2tclientcreds.txt and f2tusercreds.txt were created in the current directory.
+The number of posts to Sharkey will be at 5 posts top with this CLI option.

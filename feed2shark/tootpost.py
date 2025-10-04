@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-"""Checks an RSS feed and posts new entries to Mastodon."""
+"""Checks an RSS feed and posts new entries to Sharkey."""
 
 # 3rd party libraries imports
 import requests
@@ -34,10 +34,10 @@ class TootPost:
     def main(self):
         '''Main of the TweetPost class'''
         
-        instance = self.config.get('mastodon', 'instance_url')
-        usercredfile = self.config.get('mastodon', 'user_credentials')
-        toot_visibility = self.config.get('mastodon', 'toot_visibility', fallback='public')
-        local_only = self.config.get('mastodon', 'local_only', fallback='false') != 'false'
+        instance = self.config.get('sharkey', 'instance_url')
+        usercredfile = self.config.get('sharkey', 'user_credentials')
+        toot_visibility = self.config.get('sharkey', 'toot_visibility', fallback='public')
+        local_only = self.config.get('sharkey', 'local_only', fallback='false') != 'false'
 
         # ZTODO: Cache file contents
         with open(usercredfile, 'r', encoding='utf-8') as f:
