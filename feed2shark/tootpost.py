@@ -19,6 +19,7 @@
 # 3rd party libraries imports
 import requests
 import logging
+import mimetypes
 
 class TootPost:
     '''TootPost class'''
@@ -49,10 +50,15 @@ class TootPost:
         if 'custom' in self.options['media']:
             self.image_data.append((self.options['media']['custom'], None))
         for data in self.image_data:
-            img, alt = data
+            name, img, alt = data
             # ZTODO: alt text
-            print('Uploading image...')
-            response = requests.post(f'{instance}/api/drive/files/create', headers=headers, files=dict(file=img))
+            logging.info('Uploading image...')
+            response = requests.post(
+                f'{instance}/api/drive/files/create',
+                headers=headers,
+                data=dict(comment=alt),
+                files=dict(file=(name, img, 'multipart/form-data')),
+            )
             if response.status_code != 200:
                 logging.error(response.status_code, response.json())
                 continue
@@ -61,7 +67,7 @@ class TootPost:
         # ZTODO: Use module for sharkey API
         additional_args = dict()
         if len(media_ids):
-            additional_args['media_ids'] = media_ids
+            additional_args['mediaIds'] = media_ids
         response = requests.post(f'{instance}/api/notes/create', headers=headers, json=dict(
             text=self.toot,
             localOnly=local_only,

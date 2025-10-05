@@ -24,6 +24,7 @@ from bs4 import BeautifulSoup
 from bs4 import element
 import feedparser
 import requests
+import mimetypes
 
 # app libraries imports
 from feed2shark.addtags import AddTags
@@ -66,12 +67,15 @@ def download_image(attrs):
     try:
         response = requests.get(attrs['src'])
         if response.status_code != 200:
-            return None, None
+            return None, None, None
+        file_ext = ''
+        if 'content-type' in response.headers:
+            file_ext = mimetypes.guess_extension(response.headers['content-type']) or ''
         if 'alt' in attrs:
-            return response.text, attrs['alt']
-        return response.text, None
+            return f'attached{file_ext}', response.content, attrs['alt']
+        return f'attached{file_ext}', response.content, None
     except:
-        return None, None
+        return None, None, None
 
 def build_message(entrytosend, tweetformat, rss, tootmaxlen, notagsintoot):
     '''populate the rss dict with the new entry'''
@@ -82,10 +86,10 @@ def build_message(entrytosend, tweetformat, rss, tootmaxlen, notagsintoot):
     # Download images
     image_data = []
     for attrs in images:
-        print('Downloading image', image_data)
-        img, alt = download_image(attrs)
-        if img:
-            image_data.append((img, alt))
+        logging.info('Downloading image', attrs)
+        name, img, alt = download_image(attrs)
+        if name:
+            image_data.append((name, img, alt))
 
     # replace line breaks
     tootwithlinebreaks = tweetwithnotag.replace('\\n', '\n')
