@@ -23,6 +23,7 @@ import logging
 from bs4 import BeautifulSoup
 from bs4 import element
 import feedparser
+import requests
 
 # app libraries imports
 from feed2shark.addtags import AddTags
@@ -33,24 +34,26 @@ def strip_mfm(text):
     '''strip markup characters'''
     return ''.join([ch for ch in text if ch not in '[]() '])
 
-def build_message_item(item):
+def build_message_item(item, images):
     '''parse an item from an entry with unknown type recursively'''
     if type(item) == list:
-        return ''.join([build_message_item(elem) for elem in item])
+        return ''.join([build_message_item(elem, images) for elem in item])
     elif type(item) == feedparser.util.FeedParserDict:
-        print(item)
-        return build_message_item(BeautifulSoup(item['value'], 'html.parser').contents)
+        return build_message_item(BeautifulSoup(item['value'], 'html.parser').contents, images)
     elif type(item) == element.Tag:
         if item.name == 'a' and 'href' in item.attrs:
-            contents = strip_mfm(build_message_item(item.contents))
+            contents = strip_mfm(build_message_item(item.contents, images))
             if len(contents) == 0:
                 return ''
             return f'[{contents}]({item.attrs["href"]})'
         elif item.name == 'p':
-            return build_message_item(item.contents) + '\n\n'
+            return build_message_item(item.contents, images) + '\n\n'
+        elif item.name == 'img' and 'src' in item.attrs:
+            images.append(item.attrs)
+            return ''
         elif item.name == 'br':
             return '\n\n'
-        return build_message_item(item.contents)
+        return build_message_item(item.contents, images)
     elif type(item) == element.NavigableString:
         return str(item)
     elif type(item) == str:
@@ -58,10 +61,32 @@ def build_message_item(item):
 
     return ''
 
+def download_image(attrs):
+    '''upload an image to Sharkey'''
+    try:
+        response = requests.get(attrs['src'])
+        if response.status_code != 200:
+            return None, None
+        if 'alt' in attrs:
+            return response.text, attrs['alt']
+        return response.text, None
+    except:
+        return None, None
+
 def build_message(entrytosend, tweetformat, rss, tootmaxlen, notagsintoot):
     '''populate the rss dict with the new entry'''
-    items = {k: build_message_item(v) for k, v in entrytosend.items()}
+    images = []
+    items = {k: build_message_item(v, images) for k, v in entrytosend.items()}
     tweetwithnotag = tweetformat.format(**items)
+
+    # Download images
+    image_data = []
+    for attrs in images:
+        print('Downloading image', image_data)
+        img, alt = download_image(attrs)
+        if img:
+            image_data.append((img, alt))
+
     # replace line breaks
     tootwithlinebreaks = tweetwithnotag.replace('\\n', '\n')
     # remove duplicates from the final tweet
@@ -84,13 +109,14 @@ def build_message(entrytosend, tweetformat, rss, tootmaxlen, notagsintoot):
         finaltweet = finaltweet[0:tootmaxlen-1]
         return ''.join([finaltweet[0:-3], '...'])
     else:
-        return finaltweet
+        return finaltweet, image_data
 
-def send_message_dry_run(config, entrytosend, finaltweet):
+def send_message_dry_run(config, entrytosend, finaltweet, image_data):
     '''simulate sending message using dry run mode'''
     if entrytosend:
-        logging.warning('Would toot with visibility "{visibility}" and local_only "{local_only}": {toot}'.format(
+        logging.warning('Would toot with visibility "{visibility}" and local_only "{local_only}": {toot} with {images}'.format(
             toot=finaltweet,
+            images=len(image_data),
             visibility=config.get(
                 'sharkey', 'toot_visibility',
                 fallback='public'),
@@ -98,7 +124,7 @@ def send_message_dry_run(config, entrytosend, finaltweet):
     else:
         logging.debug('This rss entry did not meet pattern criteria. Should have not been sent')
 
-def send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss):
+def send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss, image_data):
     '''send message'''
     storeit = True
     if entrytosend and not clioptions.populate:
@@ -107,7 +133,7 @@ def send_message(config, clioptions, options, entrytosend, finaltweet, cache, rs
             visibility=config.get(
                 'sharkey', 'toot_visibility',
                 fallback='public')))
-        twp = TootPost(config, options, finaltweet)
+        twp = TootPost(config, options, finaltweet, image_data)
         storeit = twp.storeit()
     else:
         logging.debug('populating RSS entry {}'.format(rss['id']))

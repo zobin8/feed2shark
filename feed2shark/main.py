@@ -117,11 +117,11 @@ class Main:
                     fe = FilterEntry(elements, entry, options, feed['patterns'], feed['rssobject'], feed['feedname'])
                     entrytosend = fe.finalentry
                     if entrytosend:
-                        finaltweet = build_message(entrytosend, tweetformat, rss, options['tootmaxlen'], options['notagsintoot'])
+                        finaltweet, image_data = build_message(entrytosend, tweetformat, rss, options['tootmaxlen'], options['notagsintoot'])
                         if clioptions.dryrun:
-                            send_message_dry_run(config, entrytosend, finaltweet)
+                            send_message_dry_run(config, entrytosend, finaltweet, image_data)
                         else:
-                            send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss)
+                            send_message(config, clioptions, options, entrytosend, finaltweet, cache, rss, image_data)
                             # plugins
                             if plugins and entrytosend:
                                 activate_plugins(plugins, finaltweet)

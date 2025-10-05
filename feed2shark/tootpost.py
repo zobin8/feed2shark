@@ -23,12 +23,13 @@ import logging
 class TootPost:
     '''TootPost class'''
 
-    def __init__(self, config, options, toot):
+    def __init__(self, config, options, toot, image_data):
         '''Constructore of the TootPost class'''
         self.config = config
         self.options = options
         self.store = True
         self.toot = toot
+        self.image_data = image_data
         self.main()
 
     def main(self):
@@ -46,18 +47,29 @@ class TootPost:
 
         media_ids = []
         if 'custom' in self.options['media']:
-            # ZTODO: Upload media
-            response = requests.post(f'{instance}/api/drive/files/create', headers=headers, files=dict())
-            media_ids.append(response['createdNote']['id'])
-        else:
-            # ZTODO: Use module for sharkey API
-            response = requests.post(f'{instance}/api/notes/create', headers=headers, json=dict(
-                text=self.toot,
-                localOnly=local_only,
-                visibility=toot_visibility,
-            ))
+            self.image_data.append((self.options['media']['custom'], None))
+        for data in self.image_data:
+            img, alt = data
+            # ZTODO: alt text
+            print('Uploading image...')
+            response = requests.post(f'{instance}/api/drive/files/create', headers=headers, files=dict(file=img))
             if response.status_code != 200:
                 logging.error(response.status_code, response.json())
+                continue
+            media_ids.append(response.json()['id'])
+
+        # ZTODO: Use module for sharkey API
+        additional_args = dict()
+        if len(media_ids):
+            additional_args['media_ids'] = media_ids
+        response = requests.post(f'{instance}/api/notes/create', headers=headers, json=dict(
+            text=self.toot,
+            localOnly=local_only,
+            visibility=toot_visibility,
+            **additional_args,
+        ))
+        if response.status_code != 200:
+            logging.error(response.status_code, response.json())
 
     def storeit(self):
         '''Indicate if the tweet should be stored or not'''
