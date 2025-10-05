@@ -1,4 +1,8 @@
-## [0.18] - 2025-10-03
+## [0.18] - 2025-10-05
+### Added
+- Added local_only options
+- Added HTML feed parsing and image uploading
+
 ### Changed
 - Forked from feed2toot
 - Changed backend from Mastodon to Sharkey
